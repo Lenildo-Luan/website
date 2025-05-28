@@ -1,0 +1,64 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import designSystem from './planetaria-design-system.png'
+
+export const article = {
+  author: 'Lenildo Luan',
+  date: '2025-05-28',
+  title: 'Arquitetura de Software: O Mínimo pra Quem Não Quer Ficar no Século Passado 🚀  ',
+  description:
+    'Se você acha que arquitetura de software é só um monte de diagrama chato e palavra difícil, segura essa call que eu vou te explicar de um jeito que até seu primo enzo vai entender.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Se você acha que arquitetura de software é só um monte de diagrama chato e palavra difícil, segura essa call que eu vou te explicar de um jeito que até seu primo enzo vai entender.
+
+## 🤔 Arquitetura de Software? É tipo, Construir Prédio?  
+
+Quase! Mas em vez de tijolo e cimento, a gente usa **código**, **frameworks** e **padrões** pra criar sistemas que não virem uma **bagunça medieval** depois de duas semanas.  
+
+Pensa num app tipo TikTok ou Instagram: se a arquitetura for uma zona, cada feature nova vira um **apocalipse** de bugs. E ninguém merece, né?  
+
+---  
+
+## 🔥 Os Estilos de Arquitetura Que Todo Dev Precisa Conhecer  
+
+### 1. Monolito (O "Tradicional")  
+- Tudo num **só lugar** (back, front, DB).  
+- **Vantagem?** Fácil de começar.  
+- **Desvantagem?** Vira um Frankenstein se crescer demais.  
+
+💡 **Quando usar?** Pequenos projetos, MVP, ou se você **não quer dor de cabeça** (por enquanto).  
+
+### 2. Microserviços (O "Famoso TikTok")  
+- Cada **parte do sistema** é um serviço independente (usuários, posts, chat).  
+- **Vantagem?** Escalável e fácil de atualizar sem quebrar tudo.  
+- **Desvantagem?** Complexo pra caramba e precisa de Kubernetes, Docker e paciência.  
+
+💡 **Quando usar?** Grandes projetos (Netflix, Uber) que irão crescer muito no **futuro**.  
+
+### 3. Serverless (O "Sem Server, Ué?")  
+- Você só escreve o código necessário e o **provedor (AWS, Azure)** cuida do resto.  
+- **Vantagem?** Não precisa se preocupar com servidor.  
+- **Desvantagem?** Pode ficar **caro** se o tráfego explodir.  
+
+💡 **Pra quem usa?** Apps com tráfego imprevisível (tipo promoção relâmpago).  
+
+---  
+
+## 💡 Dicas Pra Não Fritar o Cérebro  
+
+✅ **Comece simples** – Não tenta fazer microserviços se seu projeto é um CRUD básico.  
+✅ **Documenta** – Senão daqui a 6 meses você não vai entender seu próprio código.  
+✅ **Escolhe as ferramentas certas** – Não usa Kubernetes pra um blog de receita, plmdds.  
+
+---  
+
+## 🎯 Conclusão: Arquitetura é Power  
+
+Se você quer ser um dev **foda**, não basta só codar – tem que pensar na estrutura. Escolher a arquitetura errada pode te deixar refém de um sistema **travado**, cheio de dívida técnica (e olha, isso pode ser pior que dívida de agiota).
