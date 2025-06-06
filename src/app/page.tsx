@@ -188,20 +188,13 @@ function Resume() {
   let resume: Array<Role> = [
     {
       company: 'DriveADS',
-      title: 'Tech Lead',
+      title: 'Senior Software Engineer',
       logo: 'https://media.licdn.com/dms/image/v2/D4D0BAQFqsamdPsyaPg/company-logo_100_100/company-logo_100_100/0/1712348355490?e=1749081600&v=beta&t=94F3-fdwbUrA7-gPI9CesE3QCx17tjobpESTQrdSAtY',
-      start: '2025',
+      start: '2024',
       end: {
         label: 'Present',
         dateTime: new Date().getFullYear().toString(),
       },
-    },
-    {
-      company: 'DriveADS',
-      title: 'Senior Software Engineer',
-      logo: 'https://media.licdn.com/dms/image/v2/D4D0BAQFqsamdPsyaPg/company-logo_100_100/company-logo_100_100/0/1712348355490?e=1749081600&v=beta&t=94F3-fdwbUrA7-gPI9CesE3QCx17tjobpESTQrdSAtY',
-      start: '2024',
-      end: '2025',
     },
     {
       company: 'Convenia',
