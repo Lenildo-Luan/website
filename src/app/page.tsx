@@ -9,12 +9,7 @@ import {
   GitHubIcon,
   InstagramIcon,
   LinkedInIcon,
-  XIcon,
 } from '@/components/SocialIcons'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
-import logoStarbucks from '@/images/logos/starbucks.svg'
 import image1 from '@/images/photos/image-1.avif'
 import image2 from '@/images/photos/image-2.avif'
 import image3 from '@/images/photos/image-3.avif'
