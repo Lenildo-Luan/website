@@ -280,17 +280,17 @@ export default async function Home() {
             {/* <SocialLink href="#" aria-label="Follow on X" icon={XIcon} /> */}
             <SocialLink
               href="https://www.instagram.com/lenildoluan/"
-              aria-label="Follow on Instagram"
+              aria-label="Instagram"
               icon={InstagramIcon}
             />
             <SocialLink
               href="https://github.com/Lenildo-Luan"
-              aria-label="Follow on GitHub"
+              aria-label="GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
               href="https://www.linkedin.com/in/lenildoluan/"
-              aria-label="Follow on LinkedIn"
+              aria-label="LinkedIn"
               icon={LinkedInIcon}
             />
           </div>

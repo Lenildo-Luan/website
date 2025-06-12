@@ -10,7 +10,7 @@ import {
   LinkedInIcon,
   XIcon,
 } from '@/components/SocialIcons'
-import portraitImage from '@/images/portrait.jpg'
+import portraitImage from '@/images/portrait.avif'
 
 function SocialLink({
   className,
@@ -69,58 +69,59 @@ export default function About() {
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            I’m Lenildo Luan. I live in New York City, where I design the
-            future.
+            Um pouco mais sobre mim<span className="text-orange-500 dark:text-orange-400">...</span>
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              I’ve loved making things for as long as I can remember, and wrote
-              my first program when I was 6 years old, just two weeks after my
-              mom brought home the brand new Macintosh LC 550 that I taught
-              myself to type on.
+              Desde que me entendo por gente, sou uma pessoa curiosa e criativa.
+              Sempre quis entender como tudo funciona e amava criar novas coisas. 
+              Essas duas características fizeram eu me apaixonar por computadores 
+              e tecnologia, que me ajudaram a entender mais sobre o mundo e me 
+              empoderaram a criar o meu próprio.
             </p>
             <p>
-              The only thing I loved more than computers as a kid was space.
-              When I was 8, I climbed the 40-foot oak tree at the back of our
-              yard while wearing my older sister’s motorcycle helmet, counted
-              down from three, and jumped — hoping the tree was tall enough that
-              with just a bit of momentum I’d be able to get to orbit.
+              Cresci em uma pequena capital do Nordeste, sem muitas condições
+              financeiras. Mas eu não deixei isso me impedir. Comecei a aprender 
+              sozinho, lendo livros, assistindo vídeos e experimentando com o que 
+              eu tinha. Com o tempo, fui me aprofundando mais, e quanto mais me 
+              aprofundava, mais me empolgava, era como ter super poderes!
             </p>
             <p>
-              I spent the next few summers indoors working on a rocket design,
-              while I recovered from the multiple surgeries it took to fix my
-              badly broken legs. It took nine iterations, but when I was 15 I
-              sent my dad’s Blackberry into orbit and was able to transmit a
-              photo back down to our family computer from space.
+              Durante a faculdade, emergi completamente na área, me envolvendo em 
+              vários projetos. Voluntários, acadêmicos, empredimentos e pessoais. 
+              Eu queria aprender sobre tudo, me envolvendo no que era possível. 
+              O que me ajudou a encontrar minha verdadeira paixão: resolver 
+              problemas através da tecnologia.
             </p>
             <p>
-              Today, I’m the founder of Planetaria, where we’re working on
-              civilian space suits and manned shuttle kits you can assemble at
-              home so that the next generation of kids really <em>can</em> make
-              it to orbit — from the comfort of their own backyards.
+              Hoje, cofundei a kalilu, onde posso usar minha curiosidade e criatividade 
+              para resolver os problemas das pessoas usando tecnologia. Estou sempre 
+              aprendendo e me desafiando a ser melhor, como profissional e pessoa. 
+              Acredito que a tecnologia pode mudar o mundo, e quero fazer parte 
+              dessa mudança.
             </p>
           </div>
         </div>
         <div className="lg:pl-20">
           <ul role="list">
-            <SocialLink href="#" icon={XIcon}>
+            {/* <SocialLink href="#" icon={XIcon}>
               Follow on X
+            </SocialLink> */}
+            <SocialLink href="https://www.instagram.com/lenildoluan/" icon={InstagramIcon} className="mt-4">
+              Me siga no Instagram
             </SocialLink>
-            <SocialLink href="#" icon={InstagramIcon} className="mt-4">
-              Follow on Instagram
+            <SocialLink href="https://github.com/Lenildo-Luan" icon={GitHubIcon} className="mt-4">
+              Me siga no GitHub
             </SocialLink>
-            <SocialLink href="#" icon={GitHubIcon} className="mt-4">
-              Follow on GitHub
-            </SocialLink>
-            <SocialLink href="#" icon={LinkedInIcon} className="mt-4">
-              Follow on LinkedIn
+            <SocialLink href="https://www.linkedin.com/in/lenildoluan/" icon={LinkedInIcon} className="mt-4">
+              Me siga no LinkedIn
             </SocialLink>
             <SocialLink
               href="mailto:spencer@planetaria.tech"
               icon={MailIcon}
               className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
             >
-              spencer@planetaria.tech
+              lenildoluan@gmail.com
             </SocialLink>
           </ul>
         </div>
