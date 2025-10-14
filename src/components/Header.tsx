@@ -233,8 +233,8 @@ function Avatar({
       className={clsx(className, 'pointer-events-auto')}
       {...props}
     >
-      <Image
-        src={avatarImage}
+      <img
+        src={"https://ik.imagekit.io/zjvju1m8yb/wq7p2jz3je1att0szbyu_WBU-pRjUpb.avif?updatedAt=1760467177842"}
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
