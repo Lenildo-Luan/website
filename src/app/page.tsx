@@ -272,9 +272,9 @@ export default async function Home() {
             <span className="text-orange-500 dark:text-orange-400">.</span>
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            Desenvolvedor de software por formação e empreendedor por natureza. 
-            Moro em João Pessoa, onde cofundei a Kalilu, um estúdio de tecnologia 
-            criativa focada em desenvolver soluções inovadoras.
+            Desenvolvedor de software multidisciplinar residente em João Pessoa, Paraíba, onde crio 
+            soluções através de código e capacito profissionais para fazer o mesmo enquanto busco me
+            tornar um ser humano melhor, 1% a cada dia.
           </p>
           <div className="mt-6 flex gap-6">
             {/* <SocialLink href="#" aria-label="Follow on X" icon={XIcon} /> */}

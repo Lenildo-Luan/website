@@ -73,32 +73,34 @@ export default function About() {
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              Desde que me entendo por gente, sou uma pessoa curiosa e criativa.
-              Sempre quis entender como tudo funciona e amava criar novas coisas. 
-              Essas duas características fizeram eu me apaixonar por computadores 
-              e tecnologia, que me ajudaram a entender mais sobre o mundo e me 
-              empoderaram a criar o meu próprio.
+              Desde que me entendo por gente, sou movido por curiosidade e
+              criatividade. Sempre quis entender como as coisas funcionam e 
+              adorava criar algo novo. Essas características me fizeram apaixonar 
+              por computadores e tecnologia — ferramentas que me ajudaram a 
+              compreender melhor o mundo e me deram poder para criar o meu 
+              próprio.
             </p>
             <p>
-              Cresci em uma pequena capital do Nordeste, sem muitas condições
-              financeiras. Mas eu não deixei isso me impedir. Comecei a aprender 
-              sozinho, lendo livros, assistindo vídeos e experimentando com o que 
-              eu tinha. Com o tempo, fui me aprofundando mais, e quanto mais me 
-              aprofundava, mais me empolgava, era como ter super poderes!
+              Cresci em João Pessoa, uma capital do Nordeste, sem muitos 
+              recursos financeiros. Mas não deixei isso me impedir. Comecei a 
+              aprender por conta própria: lendo livros, assistindo vídeos e 
+              experimentando com o que tinha em mãos. Com o tempo, fui me 
+              aprofundando, e quanto mais aprendia, mais me empolgava — era 
+              como ter superpoderes!
             </p>
             <p>
-              Durante a faculdade, emergi completamente na área, me envolvendo em 
-              vários projetos. Voluntários, acadêmicos, empredimentos e pessoais. 
-              Eu queria aprender sobre tudo, me envolvendo no que era possível. 
-              O que me ajudou a encontrar minha verdadeira paixão: resolver 
+              Durante a faculdade, mergulhei completamente na área, envolvendo-
+              me em diversos projetos: voluntários, acadêmicos, empreendimentos 
+              e pessoais. Queria aprender sobre tudo e me envolvia no que era 
+              possível. Foi assim que descobri minha verdadeira paixão: resolver 
               problemas através da tecnologia.
             </p>
             <p>
-              Hoje, cofundei a kalilu, onde posso usar minha curiosidade e criatividade 
-              para resolver os problemas das pessoas usando tecnologia. Estou sempre 
-              aprendendo e me desafiando a ser melhor, como profissional e pessoa. 
-              Acredito que a tecnologia pode mudar o mundo, e quero fazer parte 
-              dessa mudança.
+              Hoje uso minha curiosidade e criatividade para resolver problemas 
+              reais das pessoas através da tecnologia. Estou sempre aprendendo e 
+              me desafiando a evoluir, tanto como profissional quanto como 
+              pessoa. Acredito que a tecnologia pode transformar o mundo, e quero 
+              fazer parte dessa transformação.
             </p>
           </div>
         </div>

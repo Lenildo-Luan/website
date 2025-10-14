@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   title: {
     template: '%s - Lenildo Luan',
     default:
-      'Lenildo Luan - Desenvolvedor de software por formação e empreendedor por natureza',
+      'Lenildo Luan',
   },
   description:
-    'Desenvolvedor de software por formação e empreendedor por natureza. Moro em João Pessoa, onde cofundei a Kalilu, um estúdio de tecnologia criativa focada em desenvolver soluções inovadoras.',
+    'Desenvolvedor de software multidisciplinar residente em João Pessoa, Paraíba.',
   alternates: {
     types: {
       'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
