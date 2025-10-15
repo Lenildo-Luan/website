@@ -183,31 +183,31 @@ function Resume() {
   let resume: Array<Role> = [
     {
       company: 'DriveADS',
-      title: 'Senior Software Engineer',
+      title: 'Engenheiro de Software Sênior',
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749730388/driveads_u4rvlw.avif',
       start: '2024',
       end: {
-        label: 'Present',
+        label: 'Atualmente',
         dateTime: new Date().getFullYear().toString(),
       },
     },
     {
       company: 'Convenia',
-      title: 'Middle Frontend Developer',
+      title: 'Desenvolvedor Front-End Pleno',
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749729865/convenia_xzrdsr_c_pad_w_200_h_200_ar_1_1_pqbsbt.avif',
       start: '2022',
       end: '2023',
     },
     {
       company: 'Assert IFPB',
-      title: 'Junior Frontend Developer',
+      title: 'Desenvolvedor Front-End Júnior',
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749729488/assert_p9bw3l.avif',
       start: '2021',
       end: '2022',
     },
     {
-      company: 'UFPB Rectorate',
-      title: 'Software Engineer Intern',
+      company: 'Reitoria da UFPB',
+      title: 'Estagiário',
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749729796/ufpb_saemwq_c_crop_ar_1_1_djmwdq_c_pad_w_200_h_200_ar_1_1_wnu3pk.avif',
       start: '2019',
       end: '2021',
@@ -218,7 +218,7 @@ function Resume() {
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
+        <span className="ml-3">Carreira</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
@@ -226,7 +226,7 @@ function Resume() {
         ))}
       </ol>
       <Button href="https://ik.imagekit.io/zjvju1m8yb/cv_wh59OG3ZJK.pdf?updatedAt=1743451524005" variant="secondary" className="group mt-6 w-full">
-        Download CV
+        Baixar CV
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
     </div>

@@ -33,8 +33,7 @@ export function Footer() {
                 <NavLink href="/uses">Uses</NavLink>
               </div> */}
               <p className="text-sm text-zinc-400 dark:text-zinc-500">
-                &copy; {new Date().getFullYear()} Lenildo Luan. All rights
-                reserved.
+                &copy; {new Date().getFullYear()} Lenildo Luan. Todos os direitos reservados.
               </p>
             </div>
           </ContainerInner>
