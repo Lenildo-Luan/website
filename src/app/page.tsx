@@ -183,7 +183,7 @@ function Resume() {
   let resume: Array<Role> = [
     {
       company: 'DriveADS',
-      title: 'Engenheiro de Software Sênior',
+      title: 'Eng de Software Sênior',
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749730388/driveads_u4rvlw.avif',
       start: '2024',
       end: {
@@ -193,14 +193,14 @@ function Resume() {
     },
     {
       company: 'Convenia',
-      title: 'Desenvolvedor Front-End Pleno',
+      title: 'Dev Front-End Pleno',
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749729865/convenia_xzrdsr_c_pad_w_200_h_200_ar_1_1_pqbsbt.avif',
       start: '2022',
       end: '2023',
     },
     {
       company: 'Assert IFPB',
-      title: 'Desenvolvedor Front-End Júnior',
+      title: 'Dev Front-End Júnior',
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749729488/assert_p9bw3l.avif',
       start: '2021',
       end: '2022',
@@ -220,11 +220,13 @@ function Resume() {
         <BriefcaseIcon className="h-6 w-6 flex-none" />
         <span className="ml-3">Carreira</span>
       </h2>
+
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
+
       <Button href="https://ik.imagekit.io/zjvju1m8yb/cv_wh59OG3ZJK.pdf?updatedAt=1743451524005" variant="secondary" className="group mt-6 w-full">
         Baixar CV
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
@@ -271,11 +273,13 @@ export default async function Home() {
             Prazer, <br /> Lenildo Luan
             <span className="text-orange-500 dark:text-orange-400">.</span>
           </h1>
+
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             Desenvolvedor de software multidisciplinar residente em João Pessoa, Paraíba, onde crio 
             soluções através de código e capacito profissionais para fazer o mesmo enquanto busco me
             tornar um ser humano melhor, 1% a cada dia.
           </p>
+
           <div className="mt-6 flex gap-6">
             {/* <SocialLink href="#" aria-label="Follow on X" icon={XIcon} /> */}
             <SocialLink
@@ -296,7 +300,9 @@ export default async function Home() {
           </div>
         </div>
       </Container>
+
       <Photos />
+
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
@@ -304,6 +310,7 @@ export default async function Home() {
               <Article key={article.slug} article={article} />
             ))}
           </div>
+          
           <div className="space-y-10 lg:pl-16 xl:pl-24">
             {/* <Newsletter /> */}
             <Resume />
