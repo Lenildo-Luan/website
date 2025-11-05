@@ -110,13 +110,13 @@ export default function About() {
               Follow on X
             </SocialLink> */}
             <SocialLink href="https://www.instagram.com/lenildoluan/" icon={InstagramIcon} className="mt-4">
-              Me siga no Instagram
+              Instagram
             </SocialLink>
             <SocialLink href="https://github.com/Lenildo-Luan" icon={GitHubIcon} className="mt-4">
-              Me siga no GitHub
+              GitHub
             </SocialLink>
             <SocialLink href="https://www.linkedin.com/in/lenildoluan/" icon={LinkedInIcon} className="mt-4">
-              Me siga no LinkedIn
+              LinkedIn
             </SocialLink>
             <SocialLink
               href="mailto:spencer@planetaria.tech"

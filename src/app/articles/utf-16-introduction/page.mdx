@@ -1,0 +1,29 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Lenildo Luan',
+  date: '2025-11-05',
+  title: 'UTF-16: Introdução',
+  description:
+    'Imagine tentar escrever um email em português, chinês e árabe ao mesmo tempo, e depois enviar essa mensagem para alguém do outro lado do mundo. Parece simples hoje em dia, mas há algumas décadas, isso seria um pesadelo técnico.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+
+Imagine tentar escrever um email em português, chinês e árabe ao mesmo tempo, e depois enviar essa mensagem para alguém do outro lado do mundo. Parece simples hoje em dia, mas há algumas décadas, isso seria um pesadelo técnico. Cada idioma usava seu próprio sistema de codificação de caracteres, e o que funcionava perfeitamente em um computador aparecia como símbolos estranhos e incompreensíveis em outro.
+
+Foi para resolver esse caos que nasceu o Unicode – um padrão universal que atribui um número único a cada caractere de praticamente todos os sistemas de escrita do mundo, desde o alfabeto latino até emojis modernos. Mas ter uma lista universal de caracteres é apenas metade da solução. A outra metade é decidir **como** armazenar esses números na memória do computador e em arquivos. É aqui que entra o UTF-16.
+
+**UTF-16** (Unicode Transformation Format - 16 bits) é um dos esquemas de codificação mais utilizados para representar texto Unicode. Se você já programou em Java, trabalhou com APIs do Windows, ou desenvolveu em JavaScript, provavelmente já usou UTF-16 sem nem perceber – é a representação interna de strings nessas plataformas.
+
+Mas o que torna o UTF-16 especial? Por que existem tantos sistemas que o adotaram como padrão? E por que, ao mesmo tempo, vemos debates entre desenvolvedores sobre UTF-8 versus UTF-16?
+
+Neste série de posts, vamos mergulhar no mundo do UTF-16: entender sua mecânica interna, descobrir suas vantagens e limitações, e aprender quando ele é a escolha certa para seu projeto. Seja você um desenvolvedor que já se deparou com bugs misteriosos relacionados a caracteres especiais, ou alguém simplesmente curioso sobre como os computadores lidam com os idiomas humanos, este guia vai iluminar um dos pilares fundamentais da computação moderna.
+
+No próximo post, você irá descobrir que aquele simples "A" na sua tela é apenas a ponta de um iceberg da engenharia de software.

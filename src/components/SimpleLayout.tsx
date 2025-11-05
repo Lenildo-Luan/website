@@ -13,7 +13,7 @@ export function SimpleLayout({
     <Container className="mt-16 sm:mt-32">
       <header className="max-w-2xl">
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-          {title}
+          {title.slice(0, title.length - 1)}<span className="text-orange-500 dark:text-orange-400">{title.at(-1)}</span>
         </h1>
         <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
           {intro}
