@@ -14,6 +14,7 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
+import type { Locale } from '@/lib/i18n/config'
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -92,9 +93,10 @@ function MobileNavItem({
   )
 }
 
-function MobileNavigation(
-  props: React.ComponentPropsWithoutRef<typeof Popover>,
-) {
+function MobileNavigation({
+  locale,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof Popover> & { locale: Locale }) {
   return (
     <Popover {...props}>
       <PopoverButton className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
@@ -120,11 +122,11 @@ function MobileNavigation(
         </div>
         <nav className="mt-6">
           <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-            <MobileNavItem href="/about">Sobre</MobileNavItem>
-            <MobileNavItem href="/articles">Articles</MobileNavItem>
-            {/* <MobileNavItem href="/projects">Projects</MobileNavItem> */}
-            {/* <MobileNavItem href="/speaking">Speaking</MobileNavItem>
-            <MobileNavItem href="/uses">Uses</MobileNavItem> */}
+            <MobileNavItem href={`/${locale}/about`}>Sobre</MobileNavItem>
+            <MobileNavItem href={`/${locale}/articles`}>Articles</MobileNavItem>
+            {/* <MobileNavItem href={`/${locale}/projects`}>Projects</MobileNavItem> */}
+            {/* <MobileNavItem href={`/${locale}/speaking`}>Speaking</MobileNavItem>
+            <MobileNavItem href={`/${locale}/uses`}>Uses</MobileNavItem> */}
           </ul>
         </nav>
       </PopoverPanel>
@@ -161,15 +163,18 @@ function NavItem({
   )
 }
 
-function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
+function DesktopNavigation({
+  locale,
+  ...props
+}: React.ComponentPropsWithoutRef<'nav'> & { locale: Locale }) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/about">Sobre</NavItem>
-        <NavItem href="/articles">Articles</NavItem>
-        {/* <NavItem href="/projects">Projects</NavItem> */}
-        {/* <NavItem href="/speaking">Speaking</NavItem>
-        <NavItem href="/uses">Uses</NavItem> */}
+        <NavItem href={`/${locale}/about`}>Sobre</NavItem>
+        <NavItem href={`/${locale}/articles`}>Articles</NavItem>
+        {/* <NavItem href={`/${locale}/projects`}>Projects</NavItem> */}
+        {/* <NavItem href={`/${locale}/speaking`}>Speaking</NavItem>
+        <NavItem href={`/${locale}/uses`}>Uses</NavItem> */}
       </ul>
     </nav>
   )
@@ -221,13 +226,15 @@ function AvatarContainer({
 function Avatar({
   large = false,
   className,
+  locale,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof Link>, 'href'> & {
   large?: boolean
+  locale: Locale
 }) {
   return (
     <Link
-      href="/"
+      href={`/${locale}`}
       aria-label="Home"
       className={clsx(className, 'pointer-events-auto')}
       {...props}
@@ -245,8 +252,9 @@ function Avatar({
   )
 }
 
-export function Header() {
-  let isHomePage = usePathname() === '/'
+export function Header({ locale }: { locale: Locale }) {
+  let pathname = usePathname()
+  let isHomePage = pathname === `/${locale}`
 
   let headerRef = useRef<React.ElementRef<'div'>>(null)
   let avatarRef = useRef<React.ElementRef<'div'>>(null)
@@ -391,6 +399,7 @@ export function Header() {
                   />
                   <Avatar
                     large
+                    locale={locale}
                     className="block h-16 w-16 origin-left"
                     style={{ transform: 'var(--avatar-image-transform)' }}
                   />
@@ -418,13 +427,13 @@ export function Header() {
               <div className="flex flex-1">
                 {!isHomePage && (
                   <AvatarContainer>
-                    <Avatar />
+                    <Avatar locale={locale} />
                   </AvatarContainer>
                 )}
               </div>
               <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
+                <MobileNavigation locale={locale} className="pointer-events-auto md:hidden" />
+                <DesktopNavigation locale={locale} className="pointer-events-auto hidden md:block" />
               </div>
               <div className="flex justify-end md:flex-1">
                 <div className="pointer-events-auto">

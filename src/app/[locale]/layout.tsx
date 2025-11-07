@@ -9,6 +9,7 @@ import {
   getAlternateOpenGraphLocale,
 } from '@/lib/i18n/utils'
 import { LangAttribute } from '@/components/LangAttribute'
+import { Layout } from '@/components/Layout'
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ locale }))
@@ -30,6 +31,9 @@ export async function generateMetadata({
     alternates: {
       canonical: getLocalizedUrl(params.locale),
       languages: getAlternateLanguages(),
+      types: {
+        'application/rss+xml': `${getLocalizedUrl(params.locale)}/feed.xml`,
+      },
     },
     openGraph: {
       locale: getOpenGraphLocale(params.locale),
@@ -65,7 +69,14 @@ export default async function LocaleLayout({
   return (
     <>
       <LangAttribute locale={locale} />
-      {children}
+      <div className="fixed inset-0 flex justify-center sm:px-8">
+        <div className="flex w-full max-w-7xl lg:px-8">
+          <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
+        </div>
+      </div>
+      <div className="relative flex w-full flex-col">
+        <Layout locale={locale}>{children}</Layout>
+      </div>
     </>
   )
 }

@@ -1,7 +1,6 @@
 import { type Metadata } from 'next'
 
 import { Providers } from '@/app/providers'
-import { Layout } from '@/components/Layout'
 import { Analytics } from "@vercel/analytics/next"
 
 import '@/styles/tailwind.css'
@@ -13,11 +12,6 @@ export const metadata: Metadata = {
   },
   description:
     'Desenvolvedor de software multidisciplinar residente em João Pessoa, Paraíba.',
-  alternates: {
-    types: {
-      'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
-    },
-  },
 }
 
 export default function RootLayout({
@@ -30,7 +24,7 @@ export default function RootLayout({
       <body className="flex h-full bg-zinc-50 dark:bg-black">
         <Providers>
           <div className="flex w-full">
-            <Layout>{children}</Layout>
+            {children}
           </div>
         </Providers>
 
