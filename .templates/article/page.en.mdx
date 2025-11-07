@@ -1,0 +1,56 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Lenildo Luan',
+  date: '2025-01-15', // YYYY-MM-DD format (keep same as Portuguese version)
+  title: 'Article Title in English',
+  description:
+    'Brief description of the article in English. Keep it between 1-2 sentences, ideal for SEO.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+## Introduction
+
+Start your article here with an engaging introduction that captures the reader's attention.
+
+## Main Section
+
+### Subsection
+
+Organize your content into logical sections for better readability.
+
+```javascript
+// Code example
+const example = 'Use code blocks with syntax highlighting'
+console.log(example)
+```
+
+## Visual Resources
+
+You can include images:
+
+```mdx
+import myImage from './images/example.jpg'
+
+<Image src={myImage} alt="Image description" />
+```
+
+## Links
+
+Use internal links: [About me](/en/about)
+
+Or external links: [Next.js](https://nextjs.org)
+
+## Conclusion
+
+End with a summary and next steps for the reader.
+
+---
+
+**Tip:** Keep paragraphs short and use lists when appropriate for better scannability.
