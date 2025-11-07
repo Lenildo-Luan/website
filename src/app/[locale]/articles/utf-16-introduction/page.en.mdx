@@ -1,0 +1,29 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Lenildo Luan',
+  date: '2025-11-05',
+  title: 'UTF-16: Introduction',
+  description:
+    'Imagine trying to write an email in Portuguese, Chinese, and Arabic all at once, and then sending that message to someone on the other side of the world. It seems simple today, but a few decades ago, this would have been a technical nightmare.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+
+Imagine trying to write an email in Portuguese, Chinese, and Arabic all at once, and then sending that message to someone on the other side of the world. It seems simple today, but a few decades ago, this would have been a technical nightmare. Each language used its own character encoding system, and what worked perfectly on one computer appeared as strange and incomprehensible symbols on another.
+
+Unicode was created to solve this chaos – a universal standard that assigns a unique number to each character from virtually all writing systems in the world, from the Latin alphabet to modern emojis. But having a universal list of characters is only half the solution. The other half is deciding **how** to store these numbers in computer memory and files. This is where UTF-16 comes in.
+
+**UTF-16** (Unicode Transformation Format - 16 bits) is one of the most widely used encoding schemes for representing Unicode text. If you've ever programmed in Java, worked with Windows APIs, or developed in JavaScript, you've probably used UTF-16 without even realizing it – it's the internal representation of strings in these platforms.
+
+But what makes UTF-16 special? Why are there so many systems that have adopted it as a standard? And why, at the same time, do we see debates among developers about UTF-8 versus UTF-16?
+
+In this series of posts, we'll dive into the world of UTF-16: understand its internal mechanics, discover its advantages and limitations, and learn when it's the right choice for your project. Whether you're a developer who has encountered mysterious bugs related to special characters, or someone simply curious about how computers handle human languages, this guide will illuminate one of the fundamental pillars of modern computing.
+
+In the next post, you'll discover that the simple "A" on your screen is just the tip of a software engineering iceberg.
