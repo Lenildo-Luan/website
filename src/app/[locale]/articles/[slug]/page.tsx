@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getAllArticles } from '@/lib/articles'
 import type { Locale } from '@/lib/i18n/config'
+import { FallbackNotice } from '@/components/FallbackNotice'
 
 /**
  * Generate static params for all articles in all locales
@@ -32,6 +33,7 @@ export default async function ArticlePage({
   params: { locale: Locale; slug: string }
 }) {
   const { locale, slug } = params
+  let isFallback = false
 
   try {
     // Try to load article in requested locale
@@ -47,8 +49,15 @@ export default async function ArticlePage({
           `@/app/[locale]/articles/${slug}/page.pt-br.mdx`
         )
 
-        // TODO: Show fallback badge/notice to user
-        return <ArticleComponent.default />
+        isFallback = true
+
+        // Show fallback notice and article
+        return (
+          <>
+            <FallbackNotice requestedLocale={locale} fallbackLocale="pt-br" />
+            <ArticleComponent.default />
+          </>
+        )
       } catch {
         // Article doesn't exist in any locale
         notFound()
