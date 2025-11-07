@@ -10,6 +10,12 @@ import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
 import logoPlanetaria from '@/images/logos/planetaria.svg'
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import type { Locale } from '@/lib/i18n/config'
+import {
+  getLocalizedUrl,
+  getAlternateLanguages,
+  getOpenGraphLocale,
+  getAlternateOpenGraphLocale,
+} from '@/lib/i18n/utils'
 
 const projects = [
   {
@@ -66,10 +72,29 @@ export async function generateMetadata({
   params: { locale: Locale }
 }): Promise<Metadata> {
   const dict = await getDictionary(locale)
+  const path = '/projects'
 
   return {
     title: dict.pages.projects.metaTitle,
     description: dict.pages.projects.metaDescription,
+    alternates: {
+      canonical: getLocalizedUrl(locale, path),
+      languages: getAlternateLanguages(path),
+    },
+    openGraph: {
+      title: dict.pages.projects.metaTitle,
+      description: dict.pages.projects.metaDescription,
+      url: getLocalizedUrl(locale, path),
+      siteName: dict.pages.home.name,
+      locale: getOpenGraphLocale(locale),
+      alternateLocale: getAlternateOpenGraphLocale(locale),
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.pages.projects.metaTitle,
+      description: dict.pages.projects.metaDescription,
+    },
   }
 }
 
