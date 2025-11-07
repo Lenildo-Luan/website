@@ -14,6 +14,7 @@ import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import type { Locale } from '@/lib/i18n/config'
+import type { Dictionary } from '@/lib/i18n/types'
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -94,8 +95,12 @@ function MobileNavItem({
 
 function MobileNavigation({
   locale,
+  navigationLabels,
   ...props
-}: React.ComponentPropsWithoutRef<typeof Popover> & { locale: Locale }) {
+}: React.ComponentPropsWithoutRef<typeof Popover> & {
+  locale: Locale
+  navigationLabels: Dictionary['navigation']
+}) {
   return (
     <Popover {...props}>
       <PopoverButton className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
@@ -121,11 +126,15 @@ function MobileNavigation({
         </div>
         <nav className="mt-6">
           <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-            <MobileNavItem href={`/${locale}/about`}>Sobre</MobileNavItem>
-            <MobileNavItem href={`/${locale}/articles`}>Articles</MobileNavItem>
-            {/* <MobileNavItem href={`/${locale}/projects`}>Projects</MobileNavItem> */}
-            {/* <MobileNavItem href={`/${locale}/speaking`}>Speaking</MobileNavItem>
-            <MobileNavItem href={`/${locale}/uses`}>Uses</MobileNavItem> */}
+            <MobileNavItem href={`/${locale}/about`}>
+              {navigationLabels.about}
+            </MobileNavItem>
+            <MobileNavItem href={`/${locale}/articles`}>
+              {navigationLabels.articles}
+            </MobileNavItem>
+            {/* <MobileNavItem href={`/${locale}/projects`}>{navigationLabels.projects}</MobileNavItem> */}
+            {/* <MobileNavItem href={`/${locale}/speaking`}>{navigationLabels.speaking}</MobileNavItem>
+            <MobileNavItem href={`/${locale}/uses`}>{navigationLabels.uses}</MobileNavItem> */}
           </ul>
         </nav>
       </PopoverPanel>
@@ -164,16 +173,22 @@ function NavItem({
 
 function DesktopNavigation({
   locale,
+  navigationLabels,
   ...props
-}: React.ComponentPropsWithoutRef<'nav'> & { locale: Locale }) {
+}: React.ComponentPropsWithoutRef<'nav'> & {
+  locale: Locale
+  navigationLabels: Dictionary['navigation']
+}) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href={`/${locale}/about`}>Sobre</NavItem>
-        <NavItem href={`/${locale}/articles`}>Articles</NavItem>
-        {/* <NavItem href={`/${locale}/projects`}>Projects</NavItem> */}
-        {/* <NavItem href={`/${locale}/speaking`}>Speaking</NavItem>
-        <NavItem href={`/${locale}/uses`}>Uses</NavItem> */}
+        <NavItem href={`/${locale}/about`}>{navigationLabels.about}</NavItem>
+        <NavItem href={`/${locale}/articles`}>
+          {navigationLabels.articles}
+        </NavItem>
+        {/* <NavItem href={`/${locale}/projects`}>{navigationLabels.projects}</NavItem> */}
+        {/* <NavItem href={`/${locale}/speaking`}>{navigationLabels.speaking}</NavItem>
+        <NavItem href={`/${locale}/uses`}>{navigationLabels.uses}</NavItem> */}
       </ul>
     </nav>
   )
@@ -251,7 +266,13 @@ function Avatar({
   )
 }
 
-export function Header({ locale }: { locale: Locale }) {
+export function Header({
+  locale,
+  navigationLabels,
+}: {
+  locale: Locale
+  navigationLabels: Dictionary['navigation']
+}) {
   let pathname = usePathname()
   let isHomePage = pathname === `/${locale}`
 
@@ -431,8 +452,16 @@ export function Header({ locale }: { locale: Locale }) {
                 )}
               </div>
               <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation locale={locale} className="pointer-events-auto md:hidden" />
-                <DesktopNavigation locale={locale} className="pointer-events-auto hidden md:block" />
+                <MobileNavigation
+                  locale={locale}
+                  navigationLabels={navigationLabels}
+                  className="pointer-events-auto md:hidden"
+                />
+                <DesktopNavigation
+                  locale={locale}
+                  navigationLabels={navigationLabels}
+                  className="pointer-events-auto hidden md:block"
+                />
               </div>
               <div className="flex justify-end md:flex-1">
                 <div className="pointer-events-auto">

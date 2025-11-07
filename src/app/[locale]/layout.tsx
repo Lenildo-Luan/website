@@ -66,6 +66,9 @@ export default async function LocaleLayout({
   // Agora TypeScript sabe que params.locale é do tipo Locale
   const locale: Locale = params.locale
 
+  // Carregar dicionário para passar navigation labels ao Header
+  const dict = await getDictionary(locale)
+
   return (
     <>
       <LangAttribute locale={locale} />
@@ -75,7 +78,9 @@ export default async function LocaleLayout({
         </div>
       </div>
       <div className="relative flex w-full flex-col">
-        <Layout locale={locale}>{children}</Layout>
+        <Layout locale={locale} navigationLabels={dict.navigation}>
+          {children}
+        </Layout>
       </div>
     </>
   )

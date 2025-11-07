@@ -3,6 +3,8 @@ import { type Metadata } from 'next'
 import { Card } from '@/components/Card'
 import { Section } from '@/components/Section'
 import { SimpleLayout } from '@/components/SimpleLayout'
+import { getDictionary } from '@/lib/i18n/get-dictionary'
+import type { Locale } from '@/lib/i18n/config'
 
 function SpeakingSection({
   children,
@@ -40,17 +42,30 @@ function Appearance({
   )
 }
 
-export const metadata: Metadata = {
-  title: 'Speaking',
-  description:
-    'I’ve spoken at events all around the world and been interviewed for many podcasts.',
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}): Promise<Metadata> {
+  const dict = await getDictionary(locale)
+
+  return {
+    title: dict.pages.speaking.metaTitle,
+    description: dict.pages.speaking.metaDescription,
+  }
 }
 
-export default function Speaking() {
+export default async function Speaking({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}) {
+  const dict = await getDictionary(locale)
+
   return (
     <SimpleLayout
-      title="I’ve spoken at events all around the world and been interviewed for many podcasts."
-      intro="One of my favorite ways to share my ideas is live on stage, where there’s so much more communication bandwidth than there is in writing, and I love podcast interviews because they give me the opportunity to answer questions instead of just present my opinions."
+      title={dict.pages.speaking.title}
+      intro={dict.pages.speaking.metaDescription}
     >
       <div className="space-y-20">
         <SpeakingSection title="Conferences">

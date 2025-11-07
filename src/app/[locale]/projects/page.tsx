@@ -8,6 +8,8 @@ import logoCosmos from '@/images/logos/cosmos.svg'
 import logoHelioStream from '@/images/logos/helio-stream.svg'
 import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
 import logoPlanetaria from '@/images/logos/planetaria.svg'
+import { getDictionary } from '@/lib/i18n/get-dictionary'
+import type { Locale } from '@/lib/i18n/config'
 
 const projects = [
   {
@@ -58,16 +60,30 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-export const metadata: Metadata = {
-  title: 'Projects',
-  description: 'Things I’ve made trying to put my dent in the universe.',
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}): Promise<Metadata> {
+  const dict = await getDictionary(locale)
+
+  return {
+    title: dict.pages.projects.metaTitle,
+    description: dict.pages.projects.metaDescription,
+  }
 }
 
-export default function Projects() {
+export default async function Projects({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}) {
+  const dict = await getDictionary(locale)
+
   return (
     <SimpleLayout
-      title="Things I’ve made trying to put my dent in the universe."
-      intro="I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+      title={dict.pages.projects.title}
+      intro={dict.pages.projects.metaDescription}
     >
       <ul
         role="list"
