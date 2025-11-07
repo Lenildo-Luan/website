@@ -51,8 +51,18 @@ async function importArticle(
  * @example
  * const articles = await getAllArticles('pt-br')
  * // [{ slug: 'latest-post', title: '...', date: '2025-01-15', ... }, ...]
+ *
+ * @todo Phase 4 (Content MDX): Implement locale-specific article filtering
+ * Currently the locale parameter is accepted but not used to filter articles.
+ * All articles are returned regardless of locale. In Phase 4, we will:
+ * 1. Implement article file structure: page.pt-br.mdx / page.en.mdx
+ * 2. Filter articles based on locale parameter
+ * 3. Implement fallback mechanism for untranslated articles
  */
 export async function getAllArticles(locale: Locale = 'pt-br') {
+  // TODO: Use locale to filter articles once Phase 4 is implemented
+  // For now, return all articles regardless of locale
+
   // Usar o caminho literal do diretório no filesystem
   // [locale] é o nome real da pasta, não uma variável
   const articlesPath = path.join(
