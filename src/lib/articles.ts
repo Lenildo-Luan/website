@@ -21,8 +21,8 @@ export interface ArticleWithSlug extends Article {
 }
 
 /**
- * Importa dinamicamente um artigo MDX
- * @param articleFilename - Nome do arquivo do artigo (ex: "my-article/page.mdx")
+ * Importa dinamicamente um artigo MDX baseado no locale
+ * @param articleFilename - Nome do arquivo do artigo (ex: "my-article/page.pt-br.mdx")
  * @returns Promise com os dados do artigo incluindo o slug
  * @private
  */
@@ -39,30 +39,22 @@ async function importArticle(
   }
 
   return {
-    slug: articleFilename.replace(/(\/page)?\.mdx$/, ''),
+    slug: articleFilename.replace(/(\/page)?\..*?\.mdx$/, ''),
     ...article,
   }
 }
 
 /**
  * Obtém todos os artigos ordenados por data (mais recente primeiro)
- * @param locale - Locale para filtrar artigos (atualmente todos artigos são compartilhados)
+ * Filtra artigos baseados no locale especificado, com fallback para pt-br
+ *
+ * @param locale - Locale para filtrar artigos
  * @returns Promise com array de artigos ordenados por data decrescente
  * @example
  * const articles = await getAllArticles('pt-br')
  * // [{ slug: 'latest-post', title: '...', date: '2025-01-15', ... }, ...]
- *
- * @todo Phase 4 (Content MDX): Implement locale-specific article filtering
- * Currently the locale parameter is accepted but not used to filter articles.
- * All articles are returned regardless of locale. In Phase 4, we will:
- * 1. Implement article file structure: page.pt-br.mdx / page.en.mdx
- * 2. Filter articles based on locale parameter
- * 3. Implement fallback mechanism for untranslated articles
  */
 export async function getAllArticles(locale: Locale = 'pt-br') {
-  // TODO: Use locale to filter articles once Phase 4 is implemented
-  // For now, return all articles regardless of locale
-
   // Usar o caminho literal do diretório no filesystem
   // [locale] é o nome real da pasta, não uma variável
   const articlesPath = path.join(
@@ -73,10 +65,19 @@ export async function getAllArticles(locale: Locale = 'pt-br') {
     'articles',
   )
 
-  let articleFilenames = await glob('*/page.mdx', {
+  // Buscar artigos no locale especificado
+  let articleFilenames = await glob(`*/page.${locale}.mdx`, {
     cwd: articlesPath,
   })
 
+  // Se não houver artigos no locale solicitado e não for pt-br, tentar fallback
+  if (articleFilenames.length === 0 && locale !== 'pt-br') {
+    articleFilenames = await glob('*/page.pt-br.mdx', {
+      cwd: articlesPath,
+    })
+  }
+
+  // Importar artigos
   let articles = await Promise.all(articleFilenames.map(importArticle))
 
   return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date))
