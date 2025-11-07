@@ -13,7 +13,7 @@ export function Layout({
     <>
       <Header locale={locale} />
       <main className="flex-auto">{children}</main>
-      <Footer locale={locale} />
+      <Footer />
     </>
   )
 }

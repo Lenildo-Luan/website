@@ -1,26 +1,6 @@
-import Link from 'next/link'
-
 import { ContainerInner, ContainerOuter } from '@/components/Container'
-import type { Locale } from '@/lib/i18n/config'
 
-function NavLink({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
-  return (
-    <Link
-      href={href}
-      className="transition hover:text-orange-500 dark:hover:text-orange-400"
-    >
-      {children}
-    </Link>
-  )
-}
-
-export function Footer({ locale }: { locale: Locale }) {
+export function Footer() {
   return (
     <footer className="mt-32 flex-none">
       <ContainerOuter>
