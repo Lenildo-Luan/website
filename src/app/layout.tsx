@@ -9,8 +9,7 @@ import '@/styles/tailwind.css'
 export const metadata: Metadata = {
   title: {
     template: '%s - Lenildo Luan',
-    default:
-      'Lenildo Luan',
+    default: 'Lenildo Luan',
   },
   description:
     'Desenvolvedor de software multidisciplinar residente em João Pessoa, Paraíba.',
@@ -27,15 +26,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+    <html lang="pt-BR" className="h-full antialiased" suppressHydrationWarning>
       <body className="flex h-full bg-zinc-50 dark:bg-black">
         <Providers>
           <div className="flex w-full">
             <Layout>{children}</Layout>
           </div>
         </Providers>
-        
-        <Analytics/>
+
+        <Analytics />
       </body>
     </html>
   )

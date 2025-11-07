@@ -1,0 +1,95 @@
+{
+  "common": {
+    "menu": "Menu",
+    "readMore": "Ler artigo",
+    "downloadCV": "Baixar CV",
+    "currently": "Atualmente"
+  },
+  "navigation": {
+    "about": "Sobre",
+    "articles": "Artigos",
+    "projects": "Projetos",
+    "speaking": "Palestras",
+    "uses": "Ferramentas"
+  },
+  "pages": {
+    "home": {
+      "greeting": "Prazer,",
+      "name": "Lenildo Luan",
+      "intro": "Desenvolvedor de software multidisciplinar residente em João Pessoa, Paraíba, onde crio soluções através de código e capacito profissionais para fazer o mesmo enquanto busco me tornar um ser humano melhor, 1% a cada dia.",
+      "careerTitle": "Carreira"
+    },
+    "about": {
+      "title": "Um pouco mais sobre mim",
+      "metaTitle": "Sobre",
+      "metaDescription": "Sou Lenildo Luan. Moro em João Pessoa, onde transformo ideias em realidade através da tecnologia.",
+      "paragraph1": "Desde que me entendo por gente, sou movido por curiosidade e criatividade. Sempre quis entender como as coisas funcionam e adorava criar algo novo. Essas características me fizeram apaixonar por computadores e tecnologia — ferramentas que me ajudaram a compreender melhor o mundo e me deram poder para criar o meu próprio.",
+      "paragraph2": "Cresci em João Pessoa, uma capital do Nordeste, sem muitos recursos financeiros. Mas não deixei isso me impedir. Comecei a aprender por conta própria: lendo livros, assistindo vídeos e experimentando com o que tinha em mãos. Com o tempo, fui me aprofundando, e quanto mais aprendia, mais me empolgava — era como ter superpoderes!",
+      "paragraph3": "Durante a faculdade, mergulhei completamente na área, envolvendo-me em diversos projetos: voluntários, acadêmicos, empreendimentos e pessoais. Queria aprender sobre tudo e me envolvia no que era possível. Foi assim que descobri minha verdadeira paixão: resolver problemas através da tecnologia.",
+      "paragraph4": "Hoje uso minha curiosidade e criatividade para resolver problemas reais das pessoas através da tecnologia. Estou sempre aprendendo e me desafiando a evoluir, tanto como profissional quanto como pessoa. Acredito que a tecnologia pode transformar o mundo, e quero fazer parte dessa transformação."
+    },
+    "articles": {
+      "title": "Escrevendo sobre tecnologia, design e mais.",
+      "metaTitle": "Artigos",
+      "metaDescription": "Todos os meus pensamentos sobre programação, liderança e mais, em ordem cronológica."
+    },
+    "projects": {
+      "title": "Coisas que construí tentando deixar minha marca no universo.",
+      "metaTitle": "Projetos",
+      "metaDescription": "Muitas coisas que construí ao longo dos anos. Algumas são open-source, então se você vir algo que te interesse, confira o código e contribua se tiver ideias para melhorar."
+    },
+    "speaking": {
+      "title": "Já falei em eventos na minha cidade e online.",
+      "metaTitle": "Palestras",
+      "metaDescription": "Já fui convidado para palestrar em diversos eventos sobre tecnologia, desenvolvimento web e carreira em tecnologia."
+    },
+    "uses": {
+      "title": "Software que uso, gadgets que amo, e outras coisas que recomendo.",
+      "metaTitle": "Ferramentas",
+      "metaDescription": "Uma lista de todo o meu setup: software favorito, equipamento, e outras recomendações.",
+      "sections": {
+        "workstation": "Estação de trabalho",
+        "development": "Desenvolvimento",
+        "design": "Design",
+        "productivity": "Produtividade"
+      }
+    },
+    "thankYou": {
+      "title": "Obrigado por se inscrever.",
+      "description": "Vou enviar um e-mail de confirmação em breve."
+    }
+  },
+  "components": {
+    "newsletter": {
+      "title": "Mantenha-se atualizado",
+      "description": "Receba notificações quando eu publicar algo novo, cancele a qualquer momento.",
+      "emailPlaceholder": "Endereço de e-mail",
+      "joinButton": "Inscrever"
+    },
+    "resume": {
+      "roles": {
+        "seniorSoftwareEngineer": "Eng de Software Sênior",
+        "middleFrontendDeveloper": "Dev Front-End Pleno",
+        "juniorFrontendDeveloper": "Dev Front-End Júnior",
+        "intern": "Estagiário"
+      }
+    },
+    "theme": {
+      "switchToLight": "Mudar para tema claro",
+      "switchToDark": "Mudar para tema escuro",
+      "toggleTheme": "Alternar tema"
+    }
+  },
+  "social": {
+    "instagram": "Instagram",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "lenildoluan@gmail.com",
+    "followOnInstagram": "Siga no Instagram",
+    "followOnGitHub": "Siga no GitHub",
+    "followOnLinkedIn": "Siga no LinkedIn"
+  },
+  "footer": {
+    "allRightsReserved": "Todos os direitos reservados."
+  }
+}
