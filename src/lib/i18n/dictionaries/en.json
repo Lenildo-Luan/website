@@ -1,6 +1,8 @@
 {
   "common": {
     "menu": "Menu",
+    "closeMenu": "Close menu",
+    "home": "Home",
     "readMore": "Read article",
     "downloadCV": "Download CV",
     "currently": "Present"

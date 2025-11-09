@@ -96,15 +96,17 @@ function MobileNavItem({
 function MobileNavigation({
   locale,
   navigationLabels,
+  commonLabels,
   ...props
 }: React.ComponentPropsWithoutRef<typeof Popover> & {
   locale: Locale
   navigationLabels: Dictionary['navigation']
+  commonLabels: Dictionary['common']
 }) {
   return (
     <Popover {...props}>
       <PopoverButton className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
-        Menu
+        {commonLabels.menu}
         <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
       </PopoverButton>
       <PopoverBackdrop
@@ -117,11 +119,11 @@ function MobileNavigation({
         className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 duration-150 data-closed:scale-95 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-zinc-900 dark:ring-zinc-800"
       >
         <div className="flex flex-row-reverse items-center justify-between">
-          <PopoverButton aria-label="Close menu" className="-m-1 p-1">
+          <PopoverButton aria-label={commonLabels.closeMenu} className="-m-1 p-1">
             <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
           </PopoverButton>
           <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-            Menu
+            {commonLabels.menu}
           </h2>
         </div>
         <nav className="mt-6">
@@ -194,7 +196,7 @@ function DesktopNavigation({
   )
 }
 
-function ThemeToggle() {
+function ThemeToggle({ themeLabels }: { themeLabels: Dictionary['components']['theme'] }) {
   let { resolvedTheme, setTheme } = useTheme()
   let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
   let [mounted, setMounted] = useState(false)
@@ -203,10 +205,14 @@ function ThemeToggle() {
     setMounted(true)
   }, [])
 
+  const ariaLabel = mounted
+    ? (otherTheme === 'light' ? themeLabels.switchToLight : themeLabels.switchToDark)
+    : themeLabels.toggleTheme
+
   return (
     <button
       type="button"
-      aria-label={mounted ? `Switch to ${otherTheme} theme` : 'Toggle theme'}
+      aria-label={ariaLabel}
       className="group rounded-full bg-white/90 px-3 py-2 ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
       onClick={() => setTheme(otherTheme)}
     >
@@ -241,15 +247,17 @@ function Avatar({
   large = false,
   className,
   locale,
+  homeLabel,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof Link>, 'href'> & {
   large?: boolean
   locale: Locale
+  homeLabel: string
 }) {
   return (
     <Link
       href={`/${locale}`}
-      aria-label="Home"
+      aria-label={homeLabel}
       className={clsx(className, 'pointer-events-auto')}
       {...props}
     >
@@ -269,9 +277,13 @@ function Avatar({
 export function Header({
   locale,
   navigationLabels,
+  commonLabels,
+  themeLabels,
 }: {
   locale: Locale
   navigationLabels: Dictionary['navigation']
+  commonLabels: Dictionary['common']
+  themeLabels: Dictionary['components']['theme']
 }) {
   let pathname = usePathname()
   let isHomePage = pathname === `/${locale}`
@@ -420,6 +432,7 @@ export function Header({
                   <Avatar
                     large
                     locale={locale}
+                    homeLabel={commonLabels.home}
                     className="block h-16 w-16 origin-left"
                     style={{ transform: 'var(--avatar-image-transform)' }}
                   />
@@ -447,7 +460,7 @@ export function Header({
               <div className="flex flex-1">
                 {!isHomePage && (
                   <AvatarContainer>
-                    <Avatar locale={locale} />
+                    <Avatar locale={locale} homeLabel={commonLabels.home} />
                   </AvatarContainer>
                 )}
               </div>
@@ -455,6 +468,7 @@ export function Header({
                 <MobileNavigation
                   locale={locale}
                   navigationLabels={navigationLabels}
+                  commonLabels={commonLabels}
                   className="pointer-events-auto md:hidden"
                 />
                 <DesktopNavigation
@@ -465,7 +479,7 @@ export function Header({
               </div>
               <div className="flex justify-end md:flex-1">
                 <div className="pointer-events-auto">
-                  <ThemeToggle />
+                  <ThemeToggle themeLabels={themeLabels} />
                 </div>
               </div>
             </div>
