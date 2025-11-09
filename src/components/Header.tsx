@@ -13,6 +13,7 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import type { Locale } from '@/lib/i18n/config'
 import type { Dictionary } from '@/lib/i18n/types'
 
@@ -477,7 +478,10 @@ export function Header({
                   className="pointer-events-auto hidden md:block"
                 />
               </div>
-              <div className="flex justify-end md:flex-1">
+              <div className="flex justify-end gap-4 md:flex-1">
+                <div className="pointer-events-auto">
+                  <LanguageSwitcher currentLocale={locale} />
+                </div>
                 <div className="pointer-events-auto">
                   <ThemeToggle themeLabels={themeLabels} />
                 </div>
