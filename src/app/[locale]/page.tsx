@@ -270,7 +270,7 @@ export default async function Home({
   params: { locale: Locale }
 }) {
   const dict = await getDictionary(locale)
-  let articles = (await getAllArticles()).slice(0, 4)
+  let articles = (await getAllArticles(locale)).slice(0, 4)
 
   return (
     <>

@@ -80,7 +80,7 @@ export default async function ArticlesIndex({
   params: { locale: Locale }
 }) {
   const dict = await getDictionary(locale)
-  let articles = await getAllArticles()
+  let articles = await getAllArticles(locale)
 
   return (
     <SimpleLayout
