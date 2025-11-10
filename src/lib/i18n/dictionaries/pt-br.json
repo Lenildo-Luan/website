@@ -31,9 +31,9 @@
       "paragraph4": "Hoje uso minha curiosidade e criatividade para resolver problemas reais das pessoas através da tecnologia. Estou sempre aprendendo e me desafiando a evoluir, tanto como profissional quanto como pessoa. Acredito que a tecnologia pode transformar o mundo, e quero fazer parte dessa transformação."
     },
     "articles": {
-      "title": "Escrevendo sobre tecnologia, design e mais.",
+      "title": "Bem vinde ao meu blog pessoal!",
       "metaTitle": "Artigos",
-      "metaDescription": "Todos os meus pensamentos sobre programação, liderança e mais, em ordem cronológica."
+      "metaDescription": "Aqui compartilho de forma mais detalhada sobre algumas das minhas experiências profissionais e assuntos que tenho estudado e acho relevante compartilhar com o mundo."
     },
     "projects": {
       "title": "Coisas que construí tentando deixar minha marca no universo.",
@@ -70,7 +70,7 @@
     },
     "resume": {
       "roles": {
-        "seniorSoftwareEngineer": "Eng de Software Sênior",
+        "seniorSoftwareEngineer": "Eng de Software",
         "middleFrontendDeveloper": "Dev Front-End Pleno",
         "juniorFrontendDeveloper": "Dev Front-End Júnior",
         "intern": "Estagiário"

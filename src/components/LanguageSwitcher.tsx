@@ -12,13 +12,13 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale: Locale }) {
   const pathWithoutLocale = pathname.replace(`/${currentLocale}`, '') || '/'
 
   return (
-    <div className="flex gap-1 rounded-full bg-white/90 px-3 py-2 text-sm font-medium ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:ring-white/10">
+    <div className="flex gap-1 rounded-full bg-white/90 px-3 py-2 text-sm font-medium ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:ring-white/10 h-[40px]">
       {i18n.locales.map((locale, index) => {
         const isActive = locale === currentLocale
         const href = `/${locale}${pathWithoutLocale}`
 
         return (
-          <div key={locale} className="flex items-center">
+          <div key={locale} className="flex items-center ">
             {index > 0 && (
               <span className="mx-1 text-zinc-400 dark:text-zinc-600">|</span>
             )}

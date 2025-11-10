@@ -188,10 +188,7 @@ function Resume({ dict }: { dict: any }) {
       title: dict.components.resume.roles.seniorSoftwareEngineer,
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749730388/driveads_u4rvlw.avif',
       start: '2024',
-      end: {
-        label: dict.common.currently,
-        dateTime: new Date().getFullYear().toString(),
-      },
+      end: '2025',
     },
     {
       company: 'Convenia',

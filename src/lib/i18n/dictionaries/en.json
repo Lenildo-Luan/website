@@ -31,9 +31,9 @@
       "paragraph4": "Today I use my curiosity and creativity to solve real people's problems through technology. I'm always learning and challenging myself to evolve, both as a professional and as a person. I believe technology can transform the world, and I want to be part of that transformation."
     },
     "articles": {
-      "title": "Writing about tech, design, and more.",
+      "title": "Welcome to my personal blog!",
       "metaTitle": "Articles",
-      "metaDescription": "All of my thoughts on programming, leadership, and more, in chronological order."
+      "metaDescription": "Here I share in more detail about some of my professional experiences and topics I've been studying that I think are relevant to share with the world."
     },
     "projects": {
       "title": "Things I've built trying to put my dent in the universe.",
@@ -70,8 +70,8 @@
     },
     "resume": {
       "roles": {
-        "seniorSoftwareEngineer": "Senior Software Engineer",
-        "middleFrontendDeveloper": "Mid-Level Frontend Developer",
+        "seniorSoftwareEngineer": "Software Engineer",
+        "middleFrontendDeveloper": "Frontend Developer",
         "juniorFrontendDeveloper": "Junior Frontend Developer",
         "intern": "Intern"
       }
