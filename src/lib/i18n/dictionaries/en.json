@@ -1,0 +1,97 @@
+{
+  "common": {
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "home": "Home",
+    "readMore": "Read article",
+    "downloadCV": "Download CV",
+    "currently": "Present"
+  },
+  "navigation": {
+    "about": "About",
+    "articles": "Articles",
+    "projects": "Projects",
+    "speaking": "Speaking",
+    "uses": "Uses"
+  },
+  "pages": {
+    "home": {
+      "greeting": "Nice to meet you,",
+      "name": "I'm Lenildo Luan",
+      "intro": "Multidisciplinary software developer based in João Pessoa, Brazil, where I build solutions through code and empower professionals to do the same while striving to become a better human being, 1% at a time.",
+      "careerTitle": "Career"
+    },
+    "about": {
+      "title": "A little more about me",
+      "metaTitle": "About",
+      "metaDescription": "I'm Lenildo Luan. I live in João Pessoa, where I turn ideas into reality through technology.",
+      "paragraph1": "For as long as I can remember, I've been driven by curiosity and creativity. I always wanted to understand how things work and loved creating something new. These characteristics made me fall in love with computers and technology — tools that helped me better understand the world and gave me the power to create my own.",
+      "paragraph2": "I grew up in João Pessoa, a capital in Northeast Brazil, without many financial resources. But I didn't let that stop me. I started learning on my own: reading books, watching videos, and experimenting with what I had at hand. Over time, I went deeper, and the more I learned, the more excited I became — it was like having superpowers!",
+      "paragraph3": "During college, I fully immersed myself in the field, getting involved in various projects: volunteer work, academic research, entrepreneurship, and personal projects. I wanted to learn about everything and got involved wherever possible. That's how I discovered my true passion: solving problems through technology.",
+      "paragraph4": "Today I use my curiosity and creativity to solve real people's problems through technology. I'm always learning and challenging myself to evolve, both as a professional and as a person. I believe technology can transform the world, and I want to be part of that transformation."
+    },
+    "articles": {
+      "title": "Welcome to my personal blog!",
+      "metaTitle": "Articles",
+      "metaDescription": "Here I share in more detail about some of my professional experiences and topics I've been studying that I think are relevant to share with the world."
+    },
+    "projects": {
+      "title": "Things I've built trying to put my dent in the universe.",
+      "metaTitle": "Projects",
+      "metaDescription": "I've worked on tons of little projects over the years but these are the ones that I'm most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+    },
+    "speaking": {
+      "title": "I've spoken at events in my city and online.",
+      "metaTitle": "Speaking",
+      "metaDescription": "I've been invited to speak at several events about technology, web development, and careers in tech."
+    },
+    "uses": {
+      "title": "Software I use, gadgets I love, and other things I recommend.",
+      "metaTitle": "Uses",
+      "metaDescription": "A list of my entire setup: favorite software, equipment, and other recommendations.",
+      "sections": {
+        "workstation": "Workstation",
+        "development": "Development",
+        "design": "Design",
+        "productivity": "Productivity"
+      }
+    },
+    "thankYou": {
+      "title": "Thanks for subscribing.",
+      "description": "I'll send you a confirmation email shortly."
+    }
+  },
+  "components": {
+    "newsletter": {
+      "title": "Stay up to date",
+      "description": "Get notified when I publish something new, and unsubscribe at any time.",
+      "emailPlaceholder": "Email address",
+      "joinButton": "Join"
+    },
+    "resume": {
+      "roles": {
+        "seniorSoftwareEngineer": "Software Engineer",
+        "middleFrontendDeveloper": "Frontend Developer",
+        "juniorFrontendDeveloper": "Junior Frontend Developer",
+        "intern": "Intern"
+      }
+    },
+    "theme": {
+      "switchToLight": "Switch to light theme",
+      "switchToDark": "Switch to dark theme",
+      "toggleTheme": "Toggle theme"
+    }
+  },
+  "social": {
+    "instagram": "Instagram",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "lenildoluan@gmail.com",
+    "followOnInstagram": "Follow on Instagram",
+    "followOnGitHub": "Follow on GitHub",
+    "followOnLinkedIn": "Follow on LinkedIn"
+  },
+  "footer": {
+    "allRightsReserved": "All rights reserved."
+  }
+}

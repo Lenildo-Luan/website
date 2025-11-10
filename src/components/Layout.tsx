@@ -1,19 +1,31 @@
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
+import type { Locale } from '@/lib/i18n/config'
+import type { Dictionary } from '@/lib/i18n/types'
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({
+  children,
+  locale,
+  navigationLabels,
+  commonLabels,
+  themeLabels,
+}: {
+  children: React.ReactNode
+  locale: Locale
+  navigationLabels: Dictionary['navigation']
+  commonLabels: Dictionary['common']
+  themeLabels: Dictionary['components']['theme']
+}) {
   return (
     <>
-      <div className="fixed inset-0 flex justify-center sm:px-8">
-        <div className="flex w-full max-w-7xl lg:px-8">
-          <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
-        </div>
-      </div>
-      <div className="relative flex w-full flex-col">
-        <Header />
-        <main className="flex-auto">{children}</main>
-        <Footer />
-      </div>
+      <Header
+        locale={locale}
+        navigationLabels={navigationLabels}
+        commonLabels={commonLabels}
+        themeLabels={themeLabels}
+      />
+      <main className="flex-auto">{children}</main>
+      <Footer />
     </>
   )
 }

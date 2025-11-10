@@ -11,6 +11,14 @@ import {
   XIcon,
 } from '@/components/SocialIcons'
 import portraitImage from '@/images/portrait.avif'
+import { getDictionary } from '@/lib/i18n/get-dictionary'
+import type { Locale } from '@/lib/i18n/config'
+import {
+  getLocalizedUrl,
+  getAlternateLanguages,
+  getOpenGraphLocale,
+  getAlternateOpenGraphLocale,
+} from '@/lib/i18n/utils'
 
 function SocialLink({
   className,
@@ -47,13 +55,44 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-export const metadata: Metadata = {
-  title: 'About',
-  description:
-    'I’m Lenildo Luan. I live in New York City, where I design the future.',
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}): Promise<Metadata> {
+  const dict = await getDictionary(locale)
+  const path = '/about'
+
+  return {
+    title: dict.pages.about.metaTitle,
+    description: dict.pages.about.metaDescription,
+    alternates: {
+      canonical: getLocalizedUrl(locale, path),
+      languages: getAlternateLanguages(path),
+    },
+    openGraph: {
+      title: dict.pages.about.metaTitle,
+      description: dict.pages.about.metaDescription,
+      url: getLocalizedUrl(locale, path),
+      siteName: dict.pages.home.name,
+      locale: getOpenGraphLocale(locale),
+      alternateLocale: getAlternateOpenGraphLocale(locale),
+      type: 'profile',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.pages.about.metaTitle,
+      description: dict.pages.about.metaDescription,
+    },
+  }
 }
 
-export default function About() {
+export default async function About({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}) {
+  const dict = await getDictionary(locale)
   return (
     <Container className="mt-16 sm:mt-32">
       <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
@@ -69,38 +108,20 @@ export default function About() {
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Um pouco mais sobre mim<span className="text-orange-500 dark:text-orange-400">...</span>
+            {dict.pages.about.title}<span className="text-orange-500 dark:text-orange-400">...</span>
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              Desde que me entendo por gente, sou movido por curiosidade e
-              criatividade. Sempre quis entender como as coisas funcionam e 
-              adorava criar algo novo. Essas características me fizeram apaixonar 
-              por computadores e tecnologia — ferramentas que me ajudaram a 
-              compreender melhor o mundo e me deram poder para criar o meu 
-              próprio.
+              {dict.pages.about.paragraph1}
             </p>
             <p>
-              Cresci em João Pessoa, uma capital do Nordeste, sem muitos 
-              recursos financeiros. Mas não deixei isso me impedir. Comecei a 
-              aprender por conta própria: lendo livros, assistindo vídeos e 
-              experimentando com o que tinha em mãos. Com o tempo, fui me 
-              aprofundando, e quanto mais aprendia, mais me empolgava — era 
-              como ter superpoderes!
+              {dict.pages.about.paragraph2}
             </p>
             <p>
-              Durante a faculdade, mergulhei completamente na área, envolvendo-
-              me em diversos projetos: voluntários, acadêmicos, empreendimentos 
-              e pessoais. Queria aprender sobre tudo e me envolvia no que era 
-              possível. Foi assim que descobri minha verdadeira paixão: resolver 
-              problemas através da tecnologia.
+              {dict.pages.about.paragraph3}
             </p>
             <p>
-              Hoje uso minha curiosidade e criatividade para resolver problemas 
-              reais das pessoas através da tecnologia. Estou sempre aprendendo e 
-              me desafiando a evoluir, tanto como profissional quanto como 
-              pessoa. Acredito que a tecnologia pode transformar o mundo, e quero 
-              fazer parte dessa transformação.
+              {dict.pages.about.paragraph4}
             </p>
           </div>
         </div>
@@ -110,20 +131,20 @@ export default function About() {
               Follow on X
             </SocialLink> */}
             <SocialLink href="https://www.instagram.com/lenildoluan/" icon={InstagramIcon} className="mt-4">
-              Instagram
+              {dict.social.instagram}
             </SocialLink>
             <SocialLink href="https://github.com/Lenildo-Luan" icon={GitHubIcon} className="mt-4">
-              GitHub
+              {dict.social.github}
             </SocialLink>
             <SocialLink href="https://www.linkedin.com/in/lenildoluan/" icon={LinkedInIcon} className="mt-4">
-              LinkedIn
+              {dict.social.linkedin}
             </SocialLink>
             <SocialLink
-              href="mailto:spencer@planetaria.tech"
+              href={`mailto:${dict.social.email}`}
               icon={MailIcon}
               className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
             >
-              lenildoluan@gmail.com
+              {dict.social.email}
             </SocialLink>
           </ul>
         </div>

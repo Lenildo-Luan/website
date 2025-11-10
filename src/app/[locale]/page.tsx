@@ -17,6 +17,8 @@ import image4 from '@/images/photos/image-4.avif'
 import image5 from '@/images/photos/image-5.avif'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
+import { getDictionary } from '@/lib/i18n/get-dictionary'
+import type { Locale } from '@/lib/i18n/config'
 
 function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -77,17 +79,17 @@ function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-function Article({ article }: { article: ArticleWithSlug }) {
+function Article({ article, locale, readMoreText }: { article: ArticleWithSlug; locale: Locale; readMoreText: string }) {
   return (
     <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
+      <Card.Title href={`/${locale}/articles/${article.slug}`}>
         {article.title}
       </Card.Title>
       <Card.Eyebrow as="time" dateTime={article.date} decorate>
         {formatDate(article.date)}
       </Card.Eyebrow>
       <Card.Description>{article.description}</Card.Description>
-      <Card.Cta>Read article</Card.Cta>
+      <Card.Cta>{readMoreText}</Card.Cta>
     </Card>
   )
 }
@@ -105,29 +107,29 @@ function SocialLink({
   )
 }
 
-function Newsletter() {
+function Newsletter({ dict, locale }: { dict: any; locale: Locale }) {
   return (
     <form
-      action="/thank-you"
+      action={`/${locale}/thank-you`}
       className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
     >
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <MailIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Stay up to date</span>
+        <span className="ml-3">{dict.components.newsletter.title}</span>
       </h2>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Get notified when I publish something new, and unsubscribe at any time.
+        {dict.components.newsletter.description}
       </p>
       <div className="mt-6 flex">
         <input
           type="email"
-          placeholder="Email address"
-          aria-label="Email address"
+          placeholder={dict.components.newsletter.emailPlaceholder}
+          aria-label={dict.components.newsletter.emailPlaceholder}
           required
           className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(--spacing(2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 focus:outline-hidden sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-orange-400 dark:focus:ring-orange-400/10"
         />
         <Button type="submit" className="ml-4 flex-none">
-          Join
+          {dict.components.newsletter.joinButton}
         </Button>
       </div>
     </form>
@@ -179,35 +181,32 @@ function Role({ role }: { role: Role }) {
   )
 }
 
-function Resume() {
+function Resume({ dict }: { dict: any }) {
   let resume: Array<Role> = [
     {
       company: 'DriveADS',
-      title: 'Eng de Software Sênior',
+      title: dict.components.resume.roles.seniorSoftwareEngineer,
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749730388/driveads_u4rvlw.avif',
       start: '2024',
-      end: {
-        label: 'Atualmente',
-        dateTime: new Date().getFullYear().toString(),
-      },
+      end: '2025',
     },
     {
       company: 'Convenia',
-      title: 'Dev Front-End Pleno',
+      title: dict.components.resume.roles.middleFrontendDeveloper,
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749729865/convenia_xzrdsr_c_pad_w_200_h_200_ar_1_1_pqbsbt.avif',
       start: '2022',
       end: '2023',
     },
     {
       company: 'Assert IFPB',
-      title: 'Dev Front-End Júnior',
+      title: dict.components.resume.roles.juniorFrontendDeveloper,
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749729488/assert_p9bw3l.avif',
       start: '2021',
       end: '2022',
     },
     {
       company: 'Reitoria da UFPB',
-      title: 'Estagiário',
+      title: dict.components.resume.roles.intern,
       logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749729796/ufpb_saemwq_c_crop_ar_1_1_djmwdq_c_pad_w_200_h_200_ar_1_1_wnu3pk.avif',
       start: '2019',
       end: '2021',
@@ -218,7 +217,7 @@ function Resume() {
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Carreira</span>
+        <span className="ml-3">{dict.pages.home.careerTitle}</span>
       </h2>
 
       <ol className="mt-6 space-y-4">
@@ -228,7 +227,7 @@ function Resume() {
       </ol>
 
       <Button href="https://ik.imagekit.io/zjvju1m8yb/cv_wh59OG3ZJK.pdf?updatedAt=1743451524005" variant="secondary" className="group mt-6 w-full">
-        Baixar CV
+        {dict.common.downloadCV}
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
@@ -262,39 +261,42 @@ function Photos() {
   )
 }
 
-export default async function Home() {
-  let articles = (await getAllArticles()).slice(0, 4)
+export default async function Home({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}) {
+  const dict = await getDictionary(locale)
+  let articles = (await getAllArticles(locale)).slice(0, 4)
 
   return (
     <>
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Prazer, <br /> Lenildo Luan
+            {dict.pages.home.greeting} <br /> {dict.pages.home.name}
             <span className="text-orange-500 dark:text-orange-400">.</span>
           </h1>
 
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            Desenvolvedor de software multidisciplinar residente em João Pessoa, Paraíba, onde crio 
-            soluções através de código e capacito profissionais para fazer o mesmo enquanto busco me
-            tornar um ser humano melhor, 1% a cada dia.
+            {dict.pages.home.intro}
           </p>
 
           <div className="mt-6 flex gap-6">
             {/* <SocialLink href="#" aria-label="Follow on X" icon={XIcon} /> */}
             <SocialLink
               href="https://www.instagram.com/lenildoluan/"
-              aria-label="Instagram"
+              aria-label={dict.social.followOnInstagram}
               icon={InstagramIcon}
             />
             <SocialLink
               href="https://github.com/Lenildo-Luan"
-              aria-label="GitHub"
+              aria-label={dict.social.followOnGitHub}
               icon={GitHubIcon}
             />
             <SocialLink
               href="https://www.linkedin.com/in/lenildoluan/"
-              aria-label="LinkedIn"
+              aria-label={dict.social.followOnLinkedIn}
               icon={LinkedInIcon}
             />
           </div>
@@ -307,13 +309,13 @@ export default async function Home() {
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
             {articles.map((article) => (
-              <Article key={article.slug} article={article} />
+              <Article key={article.slug} article={article} locale={locale} readMoreText={dict.common.readMore} />
             ))}
           </div>
-          
+
           <div className="space-y-10 lg:pl-16 xl:pl-24">
-            {/* <Newsletter /> */}
-            <Resume />
+            {/* <Newsletter dict={dict} locale={locale} /> */}
+            <Resume dict={dict} />
           </div>
         </div>
       </Container>

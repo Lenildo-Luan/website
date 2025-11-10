@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
@@ -14,6 +13,9 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import type { Locale } from '@/lib/i18n/config'
+import type { Dictionary } from '@/lib/i18n/types'
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -92,13 +94,20 @@ function MobileNavItem({
   )
 }
 
-function MobileNavigation(
-  props: React.ComponentPropsWithoutRef<typeof Popover>,
-) {
+function MobileNavigation({
+  locale,
+  navigationLabels,
+  commonLabels,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof Popover> & {
+  locale: Locale
+  navigationLabels: Dictionary['navigation']
+  commonLabels: Dictionary['common']
+}) {
   return (
     <Popover {...props}>
       <PopoverButton className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
-        Menu
+        {commonLabels.menu}
         <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
       </PopoverButton>
       <PopoverBackdrop
@@ -111,20 +120,24 @@ function MobileNavigation(
         className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 duration-150 data-closed:scale-95 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-zinc-900 dark:ring-zinc-800"
       >
         <div className="flex flex-row-reverse items-center justify-between">
-          <PopoverButton aria-label="Close menu" className="-m-1 p-1">
+          <PopoverButton aria-label={commonLabels.closeMenu} className="-m-1 p-1">
             <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
           </PopoverButton>
           <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-            Menu
+            {commonLabels.menu}
           </h2>
         </div>
         <nav className="mt-6">
           <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-            <MobileNavItem href="/about">Sobre</MobileNavItem>
-            <MobileNavItem href="/articles">Articles</MobileNavItem>
-            {/* <MobileNavItem href="/projects">Projects</MobileNavItem> */}
-            {/* <MobileNavItem href="/speaking">Speaking</MobileNavItem>
-            <MobileNavItem href="/uses">Uses</MobileNavItem> */}
+            <MobileNavItem href={`/${locale}/about`}>
+              {navigationLabels.about}
+            </MobileNavItem>
+            <MobileNavItem href={`/${locale}/articles`}>
+              {navigationLabels.articles}
+            </MobileNavItem>
+            {/* <MobileNavItem href={`/${locale}/projects`}>{navigationLabels.projects}</MobileNavItem> */}
+            {/* <MobileNavItem href={`/${locale}/speaking`}>{navigationLabels.speaking}</MobileNavItem>
+            <MobileNavItem href={`/${locale}/uses`}>{navigationLabels.uses}</MobileNavItem> */}
           </ul>
         </nav>
       </PopoverPanel>
@@ -154,28 +167,37 @@ function NavItem({
       >
         {children}
         {isActive && (
-          <span className="absolute inset-x-1 -bottom-px h-px bg-linear-to-r from-orange-500/0 via-orange-500/40 to-orange-500/0 dark:from-orange-400/0 dark:via-orange-400/40 dark:to-orange-400/0" />
+          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-orange-500/0 via-orange-500/40 to-orange-500/0 dark:from-orange-400/0 dark:via-orange-400/40 dark:to-orange-400/0" />
         )}
       </Link>
     </li>
   )
 }
 
-function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
+function DesktopNavigation({
+  locale,
+  navigationLabels,
+  ...props
+}: React.ComponentPropsWithoutRef<'nav'> & {
+  locale: Locale
+  navigationLabels: Dictionary['navigation']
+}) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/about">Sobre</NavItem>
-        <NavItem href="/articles">Articles</NavItem>
-        {/* <NavItem href="/projects">Projects</NavItem> */}
-        {/* <NavItem href="/speaking">Speaking</NavItem>
-        <NavItem href="/uses">Uses</NavItem> */}
+        <NavItem href={`/${locale}/about`}>{navigationLabels.about}</NavItem>
+        <NavItem href={`/${locale}/articles`}>
+          {navigationLabels.articles}
+        </NavItem>
+        {/* <NavItem href={`/${locale}/projects`}>{navigationLabels.projects}</NavItem> */}
+        {/* <NavItem href={`/${locale}/speaking`}>{navigationLabels.speaking}</NavItem>
+        <NavItem href={`/${locale}/uses`}>{navigationLabels.uses}</NavItem> */}
       </ul>
     </nav>
   )
 }
 
-function ThemeToggle() {
+function ThemeToggle({ themeLabels }: { themeLabels: Dictionary['components']['theme'] }) {
   let { resolvedTheme, setTheme } = useTheme()
   let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
   let [mounted, setMounted] = useState(false)
@@ -184,10 +206,14 @@ function ThemeToggle() {
     setMounted(true)
   }, [])
 
+  const ariaLabel = mounted
+    ? (otherTheme === 'light' ? themeLabels.switchToLight : themeLabels.switchToDark)
+    : themeLabels.toggleTheme
+
   return (
     <button
       type="button"
-      aria-label={mounted ? `Switch to ${otherTheme} theme` : 'Toggle theme'}
+      aria-label={ariaLabel}
       className="group rounded-full bg-white/90 px-3 py-2 ring-1 shadow-lg shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
       onClick={() => setTheme(otherTheme)}
     >
@@ -221,14 +247,18 @@ function AvatarContainer({
 function Avatar({
   large = false,
   className,
+  locale,
+  homeLabel,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof Link>, 'href'> & {
   large?: boolean
+  locale: Locale
+  homeLabel: string
 }) {
   return (
     <Link
-      href="/"
-      aria-label="Home"
+      href={`/${locale}`}
+      aria-label={homeLabel}
       className={clsx(className, 'pointer-events-auto')}
       {...props}
     >
@@ -245,8 +275,19 @@ function Avatar({
   )
 }
 
-export function Header() {
-  let isHomePage = usePathname() === '/'
+export function Header({
+  locale,
+  navigationLabels,
+  commonLabels,
+  themeLabels,
+}: {
+  locale: Locale
+  navigationLabels: Dictionary['navigation']
+  commonLabels: Dictionary['common']
+  themeLabels: Dictionary['components']['theme']
+}) {
+  let pathname = usePathname()
+  let isHomePage = pathname === `/${locale}`
 
   let headerRef = useRef<React.ElementRef<'div'>>(null)
   let avatarRef = useRef<React.ElementRef<'div'>>(null)
@@ -391,6 +432,8 @@ export function Header() {
                   />
                   <Avatar
                     large
+                    locale={locale}
+                    homeLabel={commonLabels.home}
                     className="block h-16 w-16 origin-left"
                     style={{ transform: 'var(--avatar-image-transform)' }}
                   />
@@ -418,17 +461,29 @@ export function Header() {
               <div className="flex flex-1">
                 {!isHomePage && (
                   <AvatarContainer>
-                    <Avatar />
+                    <Avatar locale={locale} homeLabel={commonLabels.home} />
                   </AvatarContainer>
                 )}
               </div>
               <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
+                <MobileNavigation
+                  locale={locale}
+                  navigationLabels={navigationLabels}
+                  commonLabels={commonLabels}
+                  className="pointer-events-auto md:hidden"
+                />
+                <DesktopNavigation
+                  locale={locale}
+                  navigationLabels={navigationLabels}
+                  className="pointer-events-auto hidden md:block"
+                />
               </div>
-              <div className="flex justify-end md:flex-1">
+              <div className="flex justify-end gap-4 md:flex-1">
                 <div className="pointer-events-auto">
-                  <ThemeToggle />
+                  <LanguageSwitcher currentLocale={locale} />
+                </div>
+                <div className="pointer-events-auto">
+                  <ThemeToggle themeLabels={themeLabels} />
                 </div>
               </div>
             </div>

@@ -1,6 +1,16 @@
+import { type Metadata } from 'next'
+
 import { Card } from '@/components/Card'
 import { Section } from '@/components/Section'
 import { SimpleLayout } from '@/components/SimpleLayout'
+import { getDictionary } from '@/lib/i18n/get-dictionary'
+import type { Locale } from '@/lib/i18n/config'
+import {
+  getLocalizedUrl,
+  getAlternateLanguages,
+  getOpenGraphLocale,
+  getAlternateOpenGraphLocale,
+} from '@/lib/i18n/utils'
 
 function ToolsSection({
   children,
@@ -34,16 +44,49 @@ function Tool({
   )
 }
 
-export const metadata = {
-  title: 'Uses',
-  description: 'Software I use, gadgets I love, and other things I recommend.',
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}): Promise<Metadata> {
+  const dict = await getDictionary(locale)
+  const path = '/uses'
+
+  return {
+    title: dict.pages.uses.metaTitle,
+    description: dict.pages.uses.metaDescription,
+    alternates: {
+      canonical: getLocalizedUrl(locale, path),
+      languages: getAlternateLanguages(path),
+    },
+    openGraph: {
+      title: dict.pages.uses.metaTitle,
+      description: dict.pages.uses.metaDescription,
+      url: getLocalizedUrl(locale, path),
+      siteName: dict.pages.home.name,
+      locale: getOpenGraphLocale(locale),
+      alternateLocale: getAlternateOpenGraphLocale(locale),
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.pages.uses.metaTitle,
+      description: dict.pages.uses.metaDescription,
+    },
+  }
 }
 
-export default function Uses() {
+export default async function Uses({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}) {
+  const dict = await getDictionary(locale)
+
   return (
     <SimpleLayout
-      title="Software I use, gadgets I love, and other things I recommend."
-      intro="I get asked a lot about the things I use to build software, stay productive, or buy to fool myself into thinking I’m being productive when I’m really just procrastinating. Here’s a big list of all of my favorite stuff."
+      title={dict.pages.uses.title}
+      intro={dict.pages.uses.metaDescription}
     >
       <div className="space-y-20">
         <ToolsSection title="Workstation">
