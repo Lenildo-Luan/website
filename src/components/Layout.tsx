@@ -7,14 +7,23 @@ export function Layout({
   children,
   locale,
   navigationLabels,
+  commonLabels,
+  themeLabels,
 }: {
   children: React.ReactNode
   locale: Locale
   navigationLabels: Dictionary['navigation']
+  commonLabels: Dictionary['common']
+  themeLabels: Dictionary['components']['theme']
 }) {
   return (
     <>
-      <Header locale={locale} navigationLabels={navigationLabels} />
+      <Header
+        locale={locale}
+        navigationLabels={navigationLabels}
+        commonLabels={commonLabels}
+        themeLabels={themeLabels}
+      />
       <main className="flex-auto">{children}</main>
       <Footer />
     </>

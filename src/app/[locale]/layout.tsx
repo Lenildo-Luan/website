@@ -78,7 +78,12 @@ export default async function LocaleLayout({
         </div>
       </div>
       <div className="relative flex w-full flex-col">
-        <Layout locale={locale} navigationLabels={dict.navigation}>
+        <Layout
+          locale={locale}
+          navigationLabels={dict.navigation}
+          commonLabels={dict.common}
+          themeLabels={dict.components.theme}
+        >
           {children}
         </Layout>
       </div>
