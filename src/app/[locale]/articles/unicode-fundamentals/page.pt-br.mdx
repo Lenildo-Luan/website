@@ -1,0 +1,67 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Lenildo Luan',
+  date: '2025-11-12',
+  title: 'Fundamentos do Unicode',
+  description:
+    'Antes de mergulharmos nos detalhes técnicos do UTF-16, precisamos dar um passo atrás e entender o problema fundamental que o Unicode resolve.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Antes de mergulharmos nos detalhes técnicos do UTF-16, precisamos dar um passo atrás e entender o problema fundamental que o Unicode resolve. Afinal, por que precisamos de algo tão complexo apenas para exibir letras na tela?
+
+## Um Mundo de Caracteres
+
+Pense no seu teclado por um momento. Cada tecla que você pressiona precisa ser traduzida em algo que o computador possa entender e armazenar. Nos primórdios da computação, isso era simples: o padrão [ASCII](https://www.ascii-code.com/) usava apenas 7 bits (128 valores possíveis) para representar letras inglesas, números, pontuação e alguns caracteres de controle.
+
+Mas e o "ç" em "coração"? E os acentos em "José"? E os milhares de caracteres chineses? E o alfabeto cirílico? E os emojis que usamos todos os dias? 🤔
+
+Durante décadas, diferentes regiões do mundo criaram suas próprias soluções – tabelas de codificação como ISO-8859-1 (Latin-1) para idiomas europeus ocidentais, Windows-1252, Shift-JIS para japonês, e centenas de outros. O resultado era previsível: um documento criado em um sistema aparecia como [gibberish](https://en.wikipedia.org/wiki/Gibberish) em outro.
+
+## Unicode Como Catálogo Universal
+
+O Unicode chegou com uma proposta revolucionária: **criar um catálogo único e universal de todos os caracteres de todos os sistemas de escrita do mundo**. Cada caractere receberia um número único e permanente, chamado de **code point** (ponto de código).
+
+Por exemplo:
+
+- A letra "A" maiúscula é o code point **U+0041**
+- A letra "é" é o code point **U+00E9**
+- O caractere "中" (chinês) é o code point **U+4E2D**
+- O emoji "😀" é o code point **U+1F600**
+
+O prefixo "U+" indica que estamos falando de um code point Unicode, e o número é geralmente escrito em hexadecimal.
+
+## O CPF dos Caracteres
+
+Pense nos code points como o CPF dos caracteres – cada um tem seu identificador único no grande sistema do Unicode. Atualmente, o Unicode pode representar mais de 1,1 milhão de code points diferentes (de U+0000 até U+10FFFF), embora apenas cerca de 150 mil estejam atualmente atribuídos a caracteres.
+
+Esses code points são organizados em **planos**:
+
+- **Plano 0 (Basic Multilingual Plane - BMP)**: U+0000 a U+FFFF (65.536 posições)
+    - Contém os caracteres mais comuns de praticamente todos os idiomas modernos
+    - Inclui alfabetos latino, grego, cirílico, árabe, hebraico, grande parte do CJK (chinês, japonês, coreano), e muito mais
+- **Planos 1-16 (Supplementary Planes)**: U+10000 a U+10FFFF
+    - Caracteres menos comuns, scripts históricos, emojis, símbolos matemáticos especializados, etc.
+
+## O Desafio da Codificação
+
+Aqui está o ponto crucial: **Unicode define QUAIS caracteres existem e seus números identificadores, mas não define COMO esses números devem ser armazenados em bytes na memória ou em arquivos**.
+
+É como ter uma lista de todos os endereços do mundo, mas ainda precisar decidir como escrever esses endereços em envelopes de diferentes tamanhos. Você usaria uma linha? Duas? Quanto espaço reservaria para cada campo?
+
+É exatamente para isso que existem os **esquemas de codificação** (encoding schemes):
+
+- **UTF-8**: Usa de 1 a 4 bytes por caractere
+- **UTF-16**: Usa 2 ou 4 bytes por caractere
+- **UTF-32**: Usa sempre 4 bytes por caractere
+
+Cada um tem suas vantagens, desvantagens e casos de uso ideais. O UTF-16, nosso foco, encontra-se em um meio-termo interessante – e às vezes controverso – entre eficiência e simplicidade.
+
+Agora que entendemos o que são code points e por que precisamos de esquemas de codificação, no próximo artigo iremos desvendar como o UTF-16 realmente funciona.
