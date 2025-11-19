@@ -1,4 +1,4 @@
-# Hello there
+# Hello there!
 
 Multidisciplinary software developer based in João Pessoa, Brazil, where I build solutions through code and empower professionals to do the same while striving to become a better human being, 1% at a time.
 
