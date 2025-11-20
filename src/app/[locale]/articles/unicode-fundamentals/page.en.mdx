@@ -27,7 +27,7 @@ For decades, different regions of the world created their own solutions – enco
 
 ## Unicode as a Universal Catalog
 
-Unicode arrived with a revolutionary proposal: **to create a single, universal catalog of all characters from all writing systems in the world**. Each character would receive a unique and permanent number, called a **code point**.
+Unicode arrived with a revolutionary proposal: **[to create a single, universal catalog of all characters from all writing systems in the world](https://en.wikipedia.org/wiki/Unicode_range)**. Each character would receive a unique and permanent number, called a **code point**.
 
 For example:
 
@@ -42,7 +42,7 @@ The "U+" prefix indicates that we're talking about a Unicode code point, and the
 
 Think of code points as the social security number of characters – each one has its unique identifier in the great Unicode system. Currently, Unicode can represent more than 1.1 million different code points (from U+0000 to U+10FFFF), although only about 150 thousand are currently assigned to characters.
 
-These code points are organized into **planes**:
+These code points are organized into **[planes](https://en.wikipedia.org/wiki/Plane_(Unicode))**:
 
 - **Plane 0 (Basic Multilingual Plane - BMP)**: U+0000 to U+FFFF (65,536 positions)
     - Contains the most common characters from virtually all modern languages
@@ -56,7 +56,7 @@ Here's the crucial point: **Unicode defines WHICH characters exist and their ide
 
 It's like having a list of all addresses in the world, but still needing to decide how to write these addresses on envelopes of different sizes. Would you use one line? Two? How much space would you reserve for each field?
 
-This is exactly what **encoding schemes** are for:
+This is exactly what **[encoding schemes](https://www.geeksforgeeks.org/computer-science-fundamentals/what-is-character-encoding-system/)** are for:
 
 - **UTF-8**: Uses 1 to 4 bytes per character
 - **UTF-16**: Uses 2 or 4 bytes per character

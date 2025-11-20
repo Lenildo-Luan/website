@@ -27,7 +27,7 @@ Durante décadas, diferentes regiões do mundo criaram suas próprias soluções
 
 ## Unicode Como Catálogo Universal
 
-O Unicode chegou com uma proposta revolucionária: **criar um catálogo único e universal de todos os caracteres de todos os sistemas de escrita do mundo**. Cada caractere receberia um número único e permanente, chamado de **code point** (ponto de código).
+O Unicode chegou com uma proposta revolucionária: **[criar um catálogo único e universal de todos os caracteres de todos os sistemas de escrita do mundo](https://en.wikipedia.org/wiki/Unicode_range)**. Cada caractere receberia um número único e permanente, chamado de **code point** (ponto de código).
 
 Por exemplo:
 
@@ -42,7 +42,7 @@ O prefixo "U+" indica que estamos falando de um code point Unicode, e o número 
 
 Pense nos code points como o CPF dos caracteres – cada um tem seu identificador único no grande sistema do Unicode. Atualmente, o Unicode pode representar mais de 1,1 milhão de code points diferentes (de U+0000 até U+10FFFF), embora apenas cerca de 150 mil estejam atualmente atribuídos a caracteres.
 
-Esses code points são organizados em **planos**:
+Esses code points são organizados em **[planos](https://en.wikipedia.org/wiki/Plane_(Unicode))**:
 
 - **Plano 0 (Basic Multilingual Plane - BMP)**: U+0000 a U+FFFF (65.536 posições)
     - Contém os caracteres mais comuns de praticamente todos os idiomas modernos
@@ -56,7 +56,7 @@ Aqui está o ponto crucial: **Unicode define QUAIS caracteres existem e seus nú
 
 É como ter uma lista de todos os endereços do mundo, mas ainda precisar decidir como escrever esses endereços em envelopes de diferentes tamanhos. Você usaria uma linha? Duas? Quanto espaço reservaria para cada campo?
 
-É exatamente para isso que existem os **esquemas de codificação** (encoding schemes):
+É exatamente para isso que existem os **esquemas de codificação** ([encoding schemes](https://www.geeksforgeeks.org/computer-science-fundamentals/what-is-character-encoding-system/)):
 
 - **UTF-8**: Usa de 1 a 4 bytes por caractere
 - **UTF-16**: Usa 2 ou 4 bytes por caractere
