@@ -1,0 +1,107 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Lenildo Luan',
+  date: '2025-11-22',
+  title: 'UTF-16: Como Funciona',
+  description:
+    'Let\'s uncover the inner workings of UTF-16. But before diving into the technical explanation, think with me: if you were to design a system to encode Unicode in 16 bits, what immediate challenge would you face?',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Vamos desvendar o mecanismo interno do UTF-16. Mas antes de dar a explicação técnica, pense comigo: **se você fosse projetar um sistema para codificar Unicode em 16 bits, que desafio imediato encontraria?**
+
+Aqui está o problema: temos mais de 1 milhão de code points possíveis no Unicode (U+0000 até U+10FFFF), mas com 16 bits conseguimos representar apenas 65.536 valores diferentes. Como resolver isso?
+
+## Duas Abordagens em Uma
+
+O UTF-16 usa uma estratégia inteligente em duas partes. Vamos construir esse entendimento passo a passo.
+
+### Parte 1: O Caso Simples (BMP)
+
+Lembra do **Basic Multilingual Plane** (BMP) que [mencionei anteriormente](https://lenildo.com/pt-br/articles/unicode-fundamentals)? Ele contém os primeiros 65.536 code points (U+0000 a U+FFFF), exatamente o que cabe em 16 bits!
+
+Para esses caracteres, o UTF-16 é direto: **o code point é codificado exatamente como está, usando 2 bytes**.
+
+Exemplos:
+
+- `A` (U+0041) → `0x0041` em UTF-16
+- `é` (U+00E9) → `0x00E9` em UTF-16
+- `中` (U+4E2D) → `0x4E2D` em UTF-16
+
+Simples, né… se todos os caracteres estivessem no BMP, poderíamos parar por aqui. Mas e os emojis? E os hieróglifos egípcios? E os caracteres matemáticos especializados?
+
+### Parte 2: Os Pares Substitutos (Surrogate Pairs)
+
+Para code points acima de U+FFFF (nos planos suplementares), o UTF-16 usa uma estratégia matemática chamada [**surrogate pairs**](https://en.wikipedia.org/wiki/UTF-16) (pares substitutos).
+
+**Pense nisso como um código de duas partes**: em vez de usar um único valor de 16 bits, usamos **dois valores de 16 bits em sequência** – totalizando 4 bytes para esses caracteres.
+
+Mas espere, como o computador sabe se dois bytes representam um caractere BMP ou se são a primeira metade de um par substituto?
+
+## A Zona Reservada
+
+Os projetistas do Unicode reservaram uma faixa especial dentro do BMP que **nunca** será usada para caracteres reais:
+
+- **High surrogates** (substitutos altos): U+D800 a U+DBFF (1.024 valores)
+- **Low surrogates** (substitutos baixos): U+DC00 a U+DFFF (1.024 valores)
+
+Quando o decodificador UTF-16 encontra um valor nessa faixa, ele sabe imediatamente que isso não é um caractere completo, é parte de um par.
+
+Se temos 1.024 possíveis high surrogates e 1.024 possíveis low surrogates, quantas combinações únicas conseguimos criar?
+
+## O Algoritmo de Codificação
+
+Vamos ver um exemplo com o emoji 😀 (U+1F600):
+
+**Passo 1:** Subtrair 0x10000 do code point
+
+```
+0x1F600 - 0x10000 = 0x0F600
+```
+
+**Passo 2:** Converter para binário (20 bits necessários)
+
+```
+0x0F600 = 0000 1111 0110 0000 0000
+```
+
+**Passo 3:** Dividir em duas partes de 10 bits cada
+
+```
+High 10 bits: 0000 1111 01 (0x03D)
+Low 10 bits:  10 0000 0000 (0x200)
+```
+
+**Passo 4:** Adicionar os valores base
+
+```
+High surrogate: 0xD800 + 0x03D = 0xD83D
+Low surrogate:  0xDC00 + 0x200 = 0xDE00
+```
+
+**Resultado:** O emoji 😀 é codificado como `0xD83D 0xDE00` em UTF-16
+
+## Big-Endian vs Little-Endian
+
+Mas quando armazenamos um valor de 16 bits em memória, em que ordem colocamos os dois bytes?
+
+- **Big-endian** (BE): byte mais significativo primeiro → `0xD83D` vira `D8 3D`
+- **Little-endian** (LE): byte menos significativo primeiro → `0xD83D` vira `3D D8`
+
+E  como o computador sabe qual ordem usar? Através de um marcador especial no início do arquivo chamado [**BOM](https://www.ietf.org/rfc/rfc2781.txt) (Byte Order Mark)**:
+
+- `0xFEFF` no início = Big-endian (UTF-16BE)
+- `0xFFFE` no início = Little-endian (UTF-16LE)
+
+---
+
+**Observasão:** Agora que você consegue ver por que o UTF-16 não é realmente "fixed-width" como parece? Um caractere pode ocupar 2 ou 4 bytes, dependendo de onde ele está no espaço Unicode.
+
+No próximo capítulo, vamos explorar as implicações práticas dessa escolha de design, quais são as vantagens reais do UTF-16, e por que tantas plataformas importantes escolheram esse caminho.

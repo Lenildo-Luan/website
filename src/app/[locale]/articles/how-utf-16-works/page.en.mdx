@@ -1,0 +1,108 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Lenildo Luan',
+  date: '2025-11-22',
+  title: 'UTF-16: How It Works',
+  description:
+    'Let\'s uncover the inner workings of UTF-16. But before diving into the technical explanation, think with me: if you were to design a system to encode Unicode in 16 bits, what immediate challenge would you face?',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+
+Let's uncover the inner workings of UTF-16. But before diving into the technical explanation, think with me: **if you were to design a system to encode Unicode in 16 bits, what immediate challenge would you face?**
+
+Here's the problem: we have over 1 million possible code points in Unicode (U+0000 to U+10FFFF), but with 16 bits we can only represent 65,536 different values. How do we solve this?
+
+## Two Approaches in One
+
+UTF-16 uses a clever two-part strategy. Let's build this understanding step by step.
+
+### Part 1: The Simple Case (BMP)
+
+Remember the **Basic Multilingual Plane** (BMP) I [mentioned earlier](https://lenildo.com/pt-br/articles/unicode-fundamentals)? It contains the first 65,536 code points (U+0000 to U+FFFF), exactly what fits in 16 bits!
+
+For these characters, UTF-16 is straightforward: **the code point is encoded exactly as is, using 2 bytes**.
+
+Examples:
+
+- `A` (U+0041) → `0x0041` in UTF-16
+- `é` (U+00E9) → `0x00E9` in UTF-16
+- `中` (U+4E2D) → `0x4E2D` in UTF-16
+
+Simple, right... if all characters were in the BMP, we could stop here. But what about emojis? And Egyptian hieroglyphs? And specialized mathematical characters?
+
+### Part 2: Surrogate Pairs
+
+For code points above U+FFFF (in the supplementary planes), UTF-16 uses a mathematical strategy called [**surrogate pairs**](https://en.wikipedia.org/wiki/UTF-16).
+
+**Think of this as a two-part code**: instead of using a single 16-bit value, we use **two 16-bit values in sequence** — totaling 4 bytes for these characters.
+
+But wait, how does the computer know if two bytes represent a BMP character or if they're the first half of a surrogate pair?
+
+## The Reserved Zone
+
+Unicode designers reserved a special range within the BMP that will **never** be used for actual characters:
+
+- **High surrogates**: U+D800 to U+DBFF (1,024 values)
+- **Low surrogates**: U+DC00 to U+DFFF (1,024 values)
+
+When the UTF-16 decoder encounters a value in this range, it immediately knows this isn't a complete character, it's part of a pair.
+
+If we have 1,024 possible high surrogates and 1,024 possible low surrogates, how many unique combinations can we create?
+
+## The Encoding Algorithm
+
+Let's see an example with the emoji 😀 (U+1F600):
+
+**Step 1:** Subtract 0x10000 from the code point
+
+```
+0x1F600 - 0x10000 = 0x0F600
+```
+
+**Step 2:** Convert to binary (20 bits needed)
+
+```
+0x0F600 = 0000 1111 0110 0000 0000
+```
+
+**Step 3:** Split into two 10-bit parts
+
+```
+High 10 bits: 0000 1111 01 (0x03D)
+Low 10 bits:  10 0000 0000 (0x200)
+```
+
+**Step 4:** Add the base values
+
+```
+High surrogate: 0xD800 + 0x03D = 0xD83D
+Low surrogate:  0xDC00 + 0x200 = 0xDE00
+```
+
+**Result:** The emoji 😀 is encoded as `0xD83D 0xDE00` in UTF-16
+
+## Big-Endian vs Little-Endian
+
+But when we store a 16-bit value in memory, in what order do we place the two bytes?
+
+- **Big-endian** (BE): most significant byte first → `0xD83D` becomes `D8 3D`
+- **Little-endian** (LE): least significant byte first → `0xD83D` becomes `3D D8`
+
+And how does the computer know which order to use? Through a special marker at the beginning of the file called [**BOM](https://www.ietf.org/rfc/rfc2781.txt) (Byte Order Mark)**:
+
+- `0xFEFF` at the beginning = Big-endian (UTF-16BE)
+- `0xFFFE` at the beginning = Little-endian (UTF-16LE)
+
+---
+
+**Note:** Now you can see why UTF-16 isn't really "fixed-width" as it seems? A character can occupy 2 or 4 bytes, depending on where it is in the Unicode space.
+
+In the next chapter, we'll explore the practical implications of this design choice, what the real advantages of UTF-16 are, and why so many important platforms have chosen this path.
