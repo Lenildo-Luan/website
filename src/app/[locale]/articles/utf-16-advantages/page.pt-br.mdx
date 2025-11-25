@@ -1,0 +1,111 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Lenildo Luan',
+  date: '2025-11-24',
+  title: 'Vantagens do UTF-16',
+  description:
+    'Por que alguém escolheria usar UTF-16? Se ele tem a complexidade dos surrogate pairs e não é compatível com ASCII, por que empresas como Microsoft, Oracle e Mozilla o adotaram como padrão para suas plataformas?',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+**Por que alguém escolheria usar UTF-16?** Se ele tem a complexidade dos surrogate pairs e não é compatível com ASCII, por que empresas como Microsoft, Oracle e Mozilla o adotaram como padrão para suas plataformas?
+
+A resposta não é apenas histórica, há vantagens reais e práticas que tornam o UTF-16 a escolha certa para determinados contextos.
+
+## Eficiência para Idiomas Não-Latinos
+
+[**Para a maioria dos idiomas asiáticos, o UTF-16 é mais eficiente que o UTF-8**.](https://superuser.com/questions/392925/personal-txt-archive-utf-8-or-utf-16-need-chinese-and-scandinavian-character)
+
+Vamos comparar com números reais. Pegue o caractere chinês "中" (U+4E2D):
+
+- **UTF-8**: 3 bytes (`E4 B8 AD`)
+- **UTF-16**: 2 bytes (`4E 2D`)
+
+Em um documento em mandarim com milhares de caracteres, essa diferença se acumula rapidamente. Um texto que ocuparia 30 KB em UTF-8 pode ocupar apenas 20 KB em UTF-16, uma economia de 33%.
+
+O mesmo vale para:
+
+- Japonês (hiragana, katakana, kanji)
+- Coreano (hangul)
+- Tailandês
+- Hindi e outros scripts índicos
+- Árabe e hebraico
+
+Para empresas e aplicações que operam globalmente, especialmente em mercados asiáticos (que representam bilhões de usuários), essa eficiência é importante.
+
+## Acesso "Quase Constante" aos Caracteres
+
+Lembra que mencionei que UTF-16 não é verdadeiramente fixed-width? É verdade, mas há uma observação importante.
+
+**A maioria dos caracteres que você encontra no dia a dia estão no [BMP** (Basic Multilingual Plane)](https://www.sttmedia.com/unicode-basiclingualplane) e ocupam exatamente 2 bytes. Isso significa que, na prática, você pode tratar strings UTF-16 como se fossem de largura fixa para operações comuns:
+
+```java
+String texto = "Olá, 世界!";
+char c = texto.charAt(3); // Acesso direto, O(1)
+int tamanho = texto.length(); // Conta unidades de 16 bits
+```
+
+Sim, emojis e caracteres raros quebram essa suposição, mas para a vasta maioria dos casos de uso, processamento de texto, interfaces de usuário, documentos, você tem performance previsível e rápida.
+
+Compare com UTF-8, onde cada caractere pode ter de 1 a 4 bytes, tornando impossível pular direto para o 10º caractere sem percorrer os anteriores.
+
+## Adoção Histórica e Ecossistema Estabelecido
+
+Nos anos 90, quando Unicode estava sendo definido, acreditava-se que 65.536 caracteres seriam suficientes para tudo. Com base nessa premissa, o UTF-16 (originalmente chamado UCS-2) foi projetado e rapidamente adotado por:
+
+- **Windows** (todas as APIs Win32 são UTF-16 nativamente)
+- **Java** (tipo `char` é UTF-16)
+- **JavaScript** (strings internas são UTF-16)
+- **.NET** (tipo `String` é UTF-16)
+- **Python** (internamente, dependendo da versão e configuração)
+- **Qt** (framework C++ multiplataforma)
+
+Quando ficou claro que precisaríamos de mais caracteres, a solução dos surrogate pairs foi criada para manter compatibilidade retroativa. Hoje, trocar para UTF-8 nessas plataformas significaria:
+
+- Quebrar milhões de linhas de código existente
+- Reescrever APIs fundamentais do sistema
+- Perder performance em mercados asiáticos
+- Custos monumentais de migração
+
+Às vezes, manter uma solução "boa o suficiente" é melhor que a disrupção de migrar para a solução "ideal".
+
+## Equilíbrio Entre Espaço e Simplicidade
+
+O UTF-16 encontra um meio-termo interessante:
+
+| Aspecto | UTF-8 | UTF-16 | UTF-32 |
+| --- | --- | --- | --- |
+| **Tamanho para inglês** | 1 byte/char | 2 bytes/char | 4 bytes/char |
+| **Tamanho para chinês** | 3 bytes/char | 2 bytes/char | 4 bytes/char |
+| **Complexidade de processamento** | Alta | Média | Baixa |
+| **Uso de memória** | Variável | Moderado | Alto |
+
+Para aplicações que lidam com textos mistos (latino + CJK, por exemplo), o UTF-16 evita os extremos:
+
+- Não desperdiça memória como o UTF-32
+- Não penaliza textos asiáticos como o UTF-8
+- Mantém razoável simplicidade de indexação
+
+## Interoperabilidade com Windows
+
+Se você desenvolve software que precisa interagir com o Windows, e isso inclui a maioria das aplicações desktop comerciais, o UTF-16 elimina conversões constantes, pois [ele é o sistema de codificação do sistema operacional](https://learn.microsoft.com/en-us/archive/msdn-magazine/2016/september/c-unicode-encoding-conversions-with-stl-strings-and-win32-apis).
+
+Toda vez que você chama uma função da API do Windows, ela espera `wchar_t*` (UTF-16). Se seu programa usa UTF-8 internamente, você precisa converter na entrada e saída de cada chamada de sistema. Isso significa:
+
+- Overhead de CPU em conversões
+- Código adicional para gerenciar buffers temporários
+- Possibilidade de bugs em conversões mal feitas
+- Complexidade desnecessária
+
+Usar UTF-16 significa comunicação direta com o sistema operacional.
+
+---
+
+**Mas nem tudo são flores.** O UTF-16 tem suas limitações e armadilhas,algumas delas bastante sérias. No próximo capítulo, vamos explorar as desvantagens, os bugs comuns, e por que existem desenvolvedores que defendem o UTF-8.
