@@ -17,44 +17,6 @@ import {
   getAlternateOpenGraphLocale,
 } from '@/lib/i18n/utils'
 
-const projects = [
-  {
-    name: 'Planetaria',
-    description:
-      'Creating technology to empower civilians to explore space on their own terms.',
-    link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
-    logo: logoPlanetaria,
-  },
-  {
-    name: 'Animaginary',
-    description:
-      'High performance web animation library, hand-written in optimized WASM.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoAnimaginary,
-  },
-  {
-    name: 'HelioStream',
-    description:
-      'Real-time video streaming library, optimized for interstellar transmission.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoHelioStream,
-  },
-  {
-    name: 'cosmOS',
-    description:
-      'The operating system that powers our Planetaria space shuttles.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoCosmos,
-  },
-  {
-    name: 'OpenShuttle',
-    description:
-      'The schematics for the first rocket I designed that successfully made it to orbit.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoOpenShuttle,
-  },
-]
-
 function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
@@ -104,6 +66,43 @@ export default async function Projects({
   params: { locale: Locale }
 }) {
   const dict = await getDictionary(locale)
+  const projects = [
+    {
+      name: 'Alan - Massoterapeuta',
+      description:
+        dict.pages.projects.alanMassoterapeuta.description,
+      link: { href: 'https://allan-andrews-website.vercel.app/', label: 'Website' },
+      logo: logoPlanetaria,
+    },
+    {
+      name: 'Trinity Code Academy',
+      description:
+        dict.pages.projects.trinityCodeAcademy.description,
+      link: { href: 'https://academy.lenildo.com/introducao-a-programacao#', label: 'Plataforma' },
+      logo: logoAnimaginary,
+    },
+    {
+      name: 'CLER',
+      description:
+        dict.pages.projects.cler.description,
+      link: { href: 'https://www.cler.app/', label: 'Aplicativo' },
+      logo: logoHelioStream,
+    },
+    {
+      name: 'DriveADS',
+      description:
+        dict.pages.projects.driveAds.description,
+      link: { href: 'https://driveads.webflow.io/', label: 'Website' },
+      logo: logoCosmos,
+    },
+    {
+      name: 'Beco da Eletrônica',
+      description:
+        dict.pages.projects.becoDaEletronica.description,
+      link: { href: 'https://beco-da-eletronica.web.app/home', label: 'Website' },
+      logo: logoOpenShuttle,
+    },
+  ]
 
   return (
     <SimpleLayout

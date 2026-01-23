@@ -36,9 +36,24 @@
       "metaDescription": "Here I share in more detail about some of my professional experiences and topics I've been studying that I think are relevant to share with the world."
     },
     "projects": {
-      "title": "Things I've built trying to put my dent in the universe.",
+      "title": "A glimpse of my work.",
       "metaTitle": "Projects",
-      "metaDescription": "I've worked on tons of little projects over the years but these are the ones that I'm most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+      "metaDescription": "Projects I developed in collaboration with companies and self-employed professionals to help their businesses grow through technology.",
+      "alanMassoterapeuta": {
+        "description": "Website developed for Alan Massoterapeuta, a massage therapy professional in João Pessoa."
+      },
+      "trinityCodeAcademy": {
+        "description": "Online course platform focused on programming for beginners."
+      },
+      "cler": {
+        "description": "Mobile application for scheduling and managing medical appointments."
+      },
+      "driveAds": {
+        "description": "Institutional website for DriveADS, a digital advertising company."
+      },
+      "becoDaEletronica": {
+        "description": "Website for Beco da Eletrônica, an electronics components store in João Pessoa."
+      }
     },
     "speaking": {
       "title": "I've spoken at events in my city and online.",

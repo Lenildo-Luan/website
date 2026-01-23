@@ -135,7 +135,7 @@ function MobileNavigation({
             <MobileNavItem href={`/${locale}/articles`}>
               {navigationLabels.articles}
             </MobileNavItem>
-            {/* <MobileNavItem href={`/${locale}/projects`}>{navigationLabels.projects}</MobileNavItem> */}
+            <MobileNavItem href={`/${locale}/projects`}>{navigationLabels.projects}</MobileNavItem>
             {/* <MobileNavItem href={`/${locale}/speaking`}>{navigationLabels.speaking}</MobileNavItem>
             <MobileNavItem href={`/${locale}/uses`}>{navigationLabels.uses}</MobileNavItem> */}
           </ul>
@@ -189,7 +189,7 @@ function DesktopNavigation({
         <NavItem href={`/${locale}/articles`}>
           {navigationLabels.articles}
         </NavItem>
-        {/* <NavItem href={`/${locale}/projects`}>{navigationLabels.projects}</NavItem> */}
+        <NavItem href={`/${locale}/projects`}>{navigationLabels.projects}</NavItem>
         {/* <NavItem href={`/${locale}/speaking`}>{navigationLabels.speaking}</NavItem>
         <NavItem href={`/${locale}/uses`}>{navigationLabels.uses}</NavItem> */}
       </ul>

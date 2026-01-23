@@ -36,9 +36,24 @@
       "metaDescription": "Aqui compartilho de forma mais detalhada sobre algumas das minhas experiências profissionais e assuntos que tenho estudado e acho relevante compartilhar com o mundo."
     },
     "projects": {
-      "title": "Coisas que construí tentando deixar minha marca no universo.",
+      "title": "Um pouco do meu trabalho.",
       "metaTitle": "Projetos",
-      "metaDescription": "Muitas coisas que construí ao longo dos anos. Algumas são open-source, então se você vir algo que te interesse, confira o código e contribua se tiver ideias para melhorar."
+      "metaDescription": "Projetos que desenvolvi em conjuto com empresas e profissionais autônomos para ajudar seus negócios a crescer através de tecnologia.",
+      "alanMassoterapeuta": {
+        "description": "Website desenvolvido para o Alan Massoterapeuta, profissional de massoterapia em João Pessoa."
+      },
+      "trinityCodeAcademy": {
+        "description": "Plataforma de cursos online focada em programação para iniciantes."
+      },
+      "cler": {
+        "description": "Aplicativo móvel para agendamento e gerenciamento de consultas médicas."
+      },
+      "driveAds": {
+        "description": "Website institucional para a DriveADS, empresa de publicidade digital."
+      },
+      "becoDaEletronica": {
+        "description": "Website para o Beco da Eletrônica, loja de componentes eletrônicos em João Pessoa."
+      }
     },
     "speaking": {
       "title": "Já falei em eventos na minha cidade e online.",
