@@ -72,35 +72,35 @@ export default async function Projects({
       description:
         dict.pages.projects.alanMassoterapeuta.description,
       link: { href: 'https://allan-andrews-website.vercel.app/', label: 'Website' },
-      logo: logoPlanetaria,
+      logo: 'https://ik.imagekit.io/zjvju1m8yb/clientes/Group%2050_XVcWGc8lZ.png',
     },
     {
       name: 'Trinity Code Academy',
       description:
         dict.pages.projects.trinityCodeAcademy.description,
-      link: { href: 'https://academy.lenildo.com/introducao-a-programacao#', label: 'Plataforma' },
-      logo: logoAnimaginary,
+      link: { href: 'https://academy.lenildo.com/introducao-a-programacao', label: 'Plataforma' },
+      logo: 'https://ik.imagekit.io/zjvju1m8yb/clientes/Group%2052%20(1)_XXTz0KvVY7.png',
     },
     {
       name: 'CLER',
       description:
         dict.pages.projects.cler.description,
       link: { href: 'https://www.cler.app/', label: 'Aplicativo' },
-      logo: logoHelioStream,
+      logo: 'https://ik.imagekit.io/zjvju1m8yb/clientes/Group%2053_ylRJqvQjD.png',
     },
     {
       name: 'DriveADS',
       description:
         dict.pages.projects.driveAds.description,
       link: { href: 'https://driveads.webflow.io/', label: 'Website' },
-      logo: logoCosmos,
+      logo: 'https://res.cloudinary.com/du5vialgi/image/upload/v1749730388/driveads_u4rvlw.avif',
     },
     {
       name: 'Beco da Eletrônica',
       description:
         dict.pages.projects.becoDaEletronica.description,
       link: { href: 'https://beco-da-eletronica.web.app/home', label: 'Website' },
-      logo: logoOpenShuttle,
+      logo: 'https://ik.imagekit.io/zjvju1m8yb/clientes/Group%2054_bH9jx_IAh.png',
     },
   ]
 
@@ -116,12 +116,7 @@ export default async function Projects({
         {projects.map((project) => (
           <Card as="li" key={project.name}>
             <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white ring-1 shadow-md shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <Image
-                src={project.logo}
-                alt=""
-                className="h-8 w-8"
-                unoptimized
-              />
+              <Image src={project.logo} alt="" className="h-7 w-7 rounded-full" unoptimized width={28} height={28} />
             </div>
             <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
               <Card.Link href={project.link.href}>{project.name}</Card.Link>
