@@ -68,7 +68,7 @@ function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props} >
       <path
         d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5"
         strokeWidth="1.5"
@@ -226,9 +226,9 @@ function Resume({ dict }: { dict: any }) {
         ))}
       </ol>
 
-      <Button href="https://ik.imagekit.io/zjvju1m8yb/cv_wh59OG3ZJK.pdf?updatedAt=1743451524005" variant="secondary" className="group mt-6 w-full">
+      <Button href="https://www.linkedin.com/in/lenildoluan" variant="secondary" className="group mt-6 w-full">
         {dict.common.downloadCV}
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+        <ArrowDownIcon className="rotate-270 h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
   )
