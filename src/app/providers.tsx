@@ -1,92 +1,123 @@
 'use client'
 
-import { createContext, useEffect, useRef } from 'react'
+import {
+  createContext,
+  useEffect,
+  useMemo,
+  useRef,
+  type ReactNode,
+} from 'react'
 import { usePathname } from 'next/navigation'
 import { ThemeProvider, useTheme } from 'next-themes'
 
+/* --------------------------------
+ * Hook: usePrevious (sem useEffect)
+ * -------------------------------- */
 function usePrevious<T>(value: T) {
-  let ref = useRef<T>()
-
-  useEffect(() => {
-    ref.current = value
-  }, [value])
-
-  return ref.current
+  const ref = useRef<T>(value)
+  const previous = ref.current
+  ref.current = value
+  return previous
 }
 
+/* --------------------------------
+ * ThemeWatcher otimizado
+ * -------------------------------- */
 function ThemeWatcher() {
-  let { resolvedTheme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
+  const themeRef = useRef(resolvedTheme)
 
   useEffect(() => {
-    let media = window.matchMedia('(prefers-color-scheme: dark)')
+    themeRef.current = resolvedTheme
+  }, [resolvedTheme])
 
-    function onMediaChange() {
-      let systemTheme = media.matches ? 'dark' : 'light'
-      if (resolvedTheme === systemTheme) {
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const onMediaChange = () => {
+      const systemTheme = media.matches ? 'dark' : 'light'
+      if (themeRef.current === systemTheme) {
         setTheme('system')
       }
     }
 
-    onMediaChange()
     media.addEventListener('change', onMediaChange)
-
-    return () => {
-      media.removeEventListener('change', onMediaChange)
-    }
-  }, [resolvedTheme, setTheme])
+    return () => media.removeEventListener('change', onMediaChange)
+  }, [setTheme])
 
   return null
 }
 
-export const AppContext = createContext<{ previousPathname?: string }>({})
+/* --------------------------------
+ * Context
+ * -------------------------------- */
+export const AppContext = createContext<{
+  previousPathname?: string
+}>({})
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  const followerRef = useRef<HTMLDivElement | null>(null);
-  let pathname = usePathname()
-  let previousPathname = usePrevious(pathname)
+/* --------------------------------
+ * Providers
+ * -------------------------------- */
+export function Providers({ children }: { children: ReactNode }) {
+  const followerRef = useRef<HTMLDivElement | null>(null)
 
+  const pathname = usePathname()
+  const previousPathname = usePrevious(pathname)
+
+  const contextValue = useMemo(
+    () => ({ previousPathname }),
+    [previousPathname]
+  )
+
+  /* --------------------------------
+   * Mouse follower (GPU-friendly)
+   * -------------------------------- */
   useEffect(() => {
-    const follower = followerRef.current;
-    if (!follower) return;
+    const follower = followerRef.current
+    if (!follower) return
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let currentX = mouseX;
-    let currentY = mouseY;
+    let mouseX = window.innerWidth / 2
+    let mouseY = window.innerHeight / 2
+    let currentX = mouseX
+    let currentY = mouseY
 
-    const easeAmount = 0.10;
+    const easeAmount = 0.1
+    let rafId: number
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    };
+      mouseX = e.clientX
+      mouseY = e.clientY
+    }
 
-    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove, {
+      passive: true,
+    })
 
     const animate = () => {
-      const dx = mouseX - currentX;
-      const dy = mouseY - currentY;
+      currentX += (mouseX - currentX) * easeAmount
+      currentY += (mouseY - currentY) * easeAmount
 
-      currentX += dx * easeAmount;
-      currentY += dy * easeAmount;
+      follower.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`
 
-      follower.style.left = `${currentX}px`;
-      follower.style.top = `${currentY}px`;
+      rafId = requestAnimationFrame(animate)
+    }
 
-      requestAnimationFrame(animate);
-    };
-
-    animate();
+    rafId = requestAnimationFrame(animate)
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
+      document.removeEventListener('mousemove', handleMouseMove)
+      cancelAnimationFrame(rafId)
+    }
+  }, [])
 
   return (
-    <AppContext.Provider value={{ previousPathname }}>
+    <AppContext.Provider value={contextValue}>
       <ThemeProvider attribute="class" disableTransitionOnChange>
-        <div ref={followerRef} id="follower" className="fidden md:block absolute w-4 h-4 bg-orange-500 dark:orange-400 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 z-[1000]" ></div>
+        <div
+          ref={followerRef}
+          id="follower"
+          className="mix-blend-difference hidden md:block fixed w-4 h-4 bg-orange-500 dark:bg-orange-400 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 z-[1000]"
+        />
         <ThemeWatcher />
         {children}
       </ThemeProvider>
