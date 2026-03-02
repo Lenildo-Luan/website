@@ -21,7 +21,7 @@ function usePrevious<T>(value: T) {
 }
 
 /* --------------------------------
- * ThemeWatcher otimizado
+ * ThemeWatcher
  * -------------------------------- */
 function ThemeWatcher() {
   const { resolvedTheme, setTheme } = useTheme()
@@ -70,7 +70,7 @@ export function Providers({ children }: { children: ReactNode }) {
   )
 
   /* --------------------------------
-   * Mouse follower (GPU-friendly)
+   * Mouse follower
    * -------------------------------- */
   useEffect(() => {
     const follower = followerRef.current
