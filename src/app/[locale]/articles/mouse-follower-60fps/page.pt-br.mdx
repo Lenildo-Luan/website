@@ -200,41 +200,6 @@ Sem isso, o listener e o loop continuaria rodando mesmo após a desmontagem do c
 
 ---
 
-## O fluxo completo visualizado
-
-```mermaid
-flowchart TD
-    A([Montagem do Componente]) --> B[useEffect roda uma vez]
-
-    B --> C[Inicializa mouseX/Y\nno centro da tela]
-    B --> D[addEventListener\nmousemove]
-    B --> E[requestAnimationFrame\nanimate]
-
-    C --> E
-
-    D -->|a cada movimento| F[Atualiza\nmouseX / mouseY]
-
-    E --> G[Lerp: currentX += mouseX - currentX × 0.1\ncurrentY += mouseY - currentY × 0.1]
-    G --> H[Aplica translate3d\nno elemento DOM]
-    H --> I[requestAnimationFrame\nanimate]
-    I --> G
-
-    F -.->|variáveis compartilhadas| G
-
-    B --> J([Desmontagem do Componente])
-    J --> K[removeEventListener\nmousemove]
-    J --> L[cancelAnimationFrame\nrafId]
-
-    style A fill:#f97316,color:#000,stroke:none
-    style J fill:#f97316,color:#000,stroke:none
-    style G fill:#1a1a1a,color:#f97316,stroke:#f97316
-    style H fill:#1a1a1a,color:#82aaff,stroke:#82aaff
-    style K fill:#2a1a1a,color:#f87171,stroke:#f87171
-    style L fill:#2a1a1a,color:#f87171,stroke:#f87171
-```
-
----
-
 ## Boas práticas implementadas
 
 **Separação de responsabilidades entre leitura e renderização.** O `mousemove` apenas lê e armazena a posição. O `requestAnimationFrame` é o único responsável por atualizar o DOM. Isso é o padrão correto: nunca manipular o DOM diretamente dentro de event listeners de alta frequência.

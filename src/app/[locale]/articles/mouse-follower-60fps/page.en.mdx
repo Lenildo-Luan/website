@@ -200,41 +200,6 @@ Without this, the listener and the loop would keep running even after the compon
 
 ---
 
-## The complete flow visualized
-
-```mermaid
-flowchart TD
-    A([Component Mounts]) --> B[useEffect runs once]
-
-    B --> C[Initialize mouseX/Y\nat screen center]
-    B --> D[addEventListener\nmousemove]
-    B --> E[requestAnimationFrame\nanimate]
-
-    C --> E
-
-    D -->|on every movement| F[Update\nmouseX / mouseY]
-
-    E --> G[Lerp: currentX += mouseX - currentX × 0.1\ncurrentY += mouseY - currentY × 0.1]
-    G --> H[Apply translate3d\nto DOM element]
-    H --> I[requestAnimationFrame\nanimate]
-    I --> G
-
-    F -.->|shared variables| G
-
-    B --> J([Component Unmounts])
-    J --> K[removeEventListener\nmousemove]
-    J --> L[cancelAnimationFrame\nrafId]
-
-    style A fill:#f97316,color:#000,stroke:none
-    style J fill:#f97316,color:#000,stroke:none
-    style G fill:#1a1a1a,color:#f97316,stroke:#f97316
-    style H fill:#1a1a1a,color:#82aaff,stroke:#82aaff
-    style K fill:#2a1a1a,color:#f87171,stroke:#f87171
-    style L fill:#2a1a1a,color:#f87171,stroke:#f87171
-```
-
----
-
 ## Implemented best practices
 
 **Separation of concerns between reading and rendering.** The `mousemove` handler only reads and stores the position. `requestAnimationFrame` is the sole responsible for updating the DOM. This is the correct pattern: never manipulate the DOM directly inside high-frequency event listeners.
