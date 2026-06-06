@@ -71,7 +71,7 @@ export default async function Projects({
       name: 'Alan - Massoterapeuta',
       description:
         dict.pages.projects.alanMassoterapeuta.description,
-      link: { href: 'https://allan-andrews-website.vercel.app/', label: 'Website' },
+      link: { href: 'https://alan-andrews-massoterapeuta.webflow.io/', label: 'Website' },
       logo: 'https://ik.imagekit.io/zjvju1m8yb/clientes/Group%2050_XVcWGc8lZ.png',
     },
     {
